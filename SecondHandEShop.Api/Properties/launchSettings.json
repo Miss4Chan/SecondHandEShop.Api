@@ -14,7 +14,9 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "JWT_SECRET": "Lep i suncan dan za objesiti se :)))))",
+        "JWT_ISSUER": "Second Hand EShop"
       }
     },
     "SecondHandEShop.Api": {

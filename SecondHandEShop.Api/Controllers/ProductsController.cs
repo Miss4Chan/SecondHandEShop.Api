@@ -1,14 +1,13 @@
 ﻿using Domain.Domain_models;
+using Domain.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Service.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace SecondHandEShop.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class ProductsController : ControllerBase
@@ -33,20 +32,20 @@ namespace SecondHandEShop.Api.Controllers
         public IActionResult CreateProduct(Product product)
         {
             var newProduct = _productService.CreateProduct(product);
-            return CreatedAtRoute("GetExpense", new { newProduct.Id }, newProduct);
+            return CreatedAtRoute("GetProduct", new { newProduct.Id }, newProduct);
         }
 
         [HttpDelete]
-        public IActionResult DeleteProduct(Product product)
+        public IActionResult DeleteProduct(ProductDTO productDTO)
         {
-            _productService.DeleteProduct(product);
+            _productService.DeleteProduct(productDTO);
             return Ok();
         }
 
         [HttpPut]
-        public IActionResult EditProduct(Product product)
+        public IActionResult EditProduct(ProductDTO productDTO)
         {
-            return Ok(_productService.EditProduct(product));
+            return Ok(_productService.EditProduct(productDTO));
         }
     }
 }

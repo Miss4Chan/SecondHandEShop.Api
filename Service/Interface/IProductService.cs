@@ -1,16 +1,16 @@
 ﻿using Domain.Domain_models;
-using System;
+using Domain.DTO;
 using System.Collections.Generic;
-using System.Text;
+
 
 namespace Service.Interface
 {
     public interface IProductService
     {
-        List<Product> GetAllProducts();
-        Product GetProduct(int id);
-        Product EditProduct(Product product);
-        Product CreateProduct(Product product);
-        void DeleteProduct(Product product);
+        List<ProductDTO> GetAllProducts();
+        ProductDTO GetProduct(int id);
+        ProductDTO EditProduct(ProductDTO productDTO);
+        ProductDTO CreateProduct(Product product);
+        void DeleteProduct(ProductDTO productDTO);
     }
 }

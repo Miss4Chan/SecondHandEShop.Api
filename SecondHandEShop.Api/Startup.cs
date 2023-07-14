@@ -1,17 +1,22 @@
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Repository;
 using Service.Implementation;
 using Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace SecondHandEShop.Api
@@ -31,17 +36,39 @@ namespace SecondHandEShop.Api
             services.AddControllers();
             services.AddDbContext<AppDbContext>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IPasswordHasher, PasswordHasher>();
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSwaggerDocument(settings =>
             {
-                settings.Title = "Products";
+                settings.Title = "Second Hand EShop";
             });
             services.AddCors(options =>
             {
-                options.AddPolicy("ProductsPolicy", builder =>
+                options.AddPolicy("SecondHandEshopPolicy", builder =>
                  {
                      builder.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
                  });
             });
+            var secret = Environment.GetEnvironmentVariable("JWT_SECRET");
+            var issuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
+
+            services.AddAuthentication(opts =>
+            {
+                opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                        .AddJwtBearer(opts =>
+                        {
+                            opts.TokenValidationParameters = new TokenValidationParameters
+                            {
+                                ValidateIssuerSigningKey = true,
+                                ValidIssuer = issuer,
+                                ValidateAudience = false,
+                                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret))
+                            };
+                        });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,8 +82,8 @@ namespace SecondHandEShop.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors("ProductsPolicy");
-
+            app.UseCors("SecondHandEshopPolicy");
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseOpenApi();
             app.UseSwaggerUi3();

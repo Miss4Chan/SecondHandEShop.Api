@@ -1,4 +1,5 @@
 ﻿using Domain.Domain_models;
+using Domain.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Repository
         }
 
         public DbSet<Product> Products { get; set; }
-
+        public DbSet<ShopApplicationUser> ShopApplicationUsers { get; set; }
         protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
