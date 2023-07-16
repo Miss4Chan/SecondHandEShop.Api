@@ -36,7 +36,7 @@ namespace SecondHandEShop.Api.Controllers
         }
 
         [HttpPost("signin")]
-        public async Task<IActionResult> SignIn([FromBody] ShopApplicationUser user)
+        public async Task<IActionResult> SignIn(ShopApplicationUser user)
         {
             try
             {
