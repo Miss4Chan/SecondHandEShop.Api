@@ -2,6 +2,7 @@
 using Domain.DTO;
 using Domain.Identity;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using Service.Interface;
 using System.Collections.Generic;
@@ -64,5 +65,39 @@ namespace Service.Implementation
                 .First();
                
         }
+
+        public bool AddToShoppingCart(Product product, string email)
+        {
+            var user = _context.ShopApplicationUsers
+                .Include(u => u.UserShoppingCart) // Eagerly load the UserShoppingCart navigation property
+                .ThenInclude(u => u.ProductsInShoppingCart)
+                .FirstOrDefault(user => user.Email == email);
+
+            var userShoppingCart = user.UserShoppingCart;
+
+            if (userShoppingCart != null && product != null)
+            {
+                var isAlreadyAdded = userShoppingCart.ProductsInShoppingCart.FirstOrDefault(p => p.ProductId == product.Id);
+
+                if (isAlreadyAdded == null)
+                {
+                    _context.Attach(product);
+                    var productInShoppingCart = new ProductInShoppingCart
+                    {
+                        ShoppingCart = userShoppingCart,
+                        Product = product,
+                        ShoppingCartId = userShoppingCart.Id,
+                        ProductId = product.Id
+                    };
+
+                    _context.ProductsInShoppingCarts.Add(productInShoppingCart);
+                    _context.SaveChanges();
+                }
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }

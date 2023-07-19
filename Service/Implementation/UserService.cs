@@ -1,4 +1,5 @@
 ﻿using Domain.CustomExceptions;
+using Domain.Domain_models;
 using Domain.DTO;
 using Domain.Identity;
 using Domain.Utilities;
@@ -49,14 +50,19 @@ namespace Service.Implementation
                 throw new EmailAlreadyExistsException("User with this Email already exists!");
             }
 
-            user.Email = user.Email;
             user.Password = _passwordHasher.HashPassword(user.Password);
-            user.Name = user.Name;
-            user.Surname = user.Surname;
-            user.Phone = user.Phone;
-            user.Address = user.Address;
+
+            var userShoppingCart = new ShoppingCart
+            {
+                UserId = user.Id
+            };
+
+            user.UserShoppingCart = userShoppingCart; 
 
             await _context.AddAsync(user);
+            await _context.SaveChangesAsync();
+
+
             await _context.SaveChangesAsync();
 
             return new AuthenticatedUserDTO

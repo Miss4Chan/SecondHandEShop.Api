@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using Repository;
 using Service.Implementation;
 using Service.Interface;
@@ -33,9 +34,16 @@ namespace SecondHandEShop.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers()
+                 .AddNewtonsoftJson(options => // Add the configuration for Newtonsoft.Json here
+                {
+                        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                 });
+
             services.AddControllers();
             services.AddDbContext<AppDbContext>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IShoppingCartService, ShoppingCartService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IPasswordHasher, PasswordHasher>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
@@ -47,7 +55,9 @@ namespace SecondHandEShop.Api
             {
                 options.AddPolicy("SecondHandEshopPolicy", builder =>
                  {
-                     builder.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
+                     builder.WithOrigins("http://localhost:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
                  });
             });
             var secret = Environment.GetEnvironmentVariable("JWT_SECRET");

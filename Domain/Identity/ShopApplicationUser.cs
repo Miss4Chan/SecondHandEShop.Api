@@ -1,8 +1,4 @@
 ﻿using Domain.Domain_models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Domain.Identity
 {
@@ -14,5 +10,6 @@ namespace Domain.Identity
         public string Password { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
+        public virtual ShoppingCart UserShoppingCart { get; set; }
     }
 }

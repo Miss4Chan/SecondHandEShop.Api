@@ -47,5 +47,13 @@ namespace SecondHandEShop.Api.Controllers
         {
             return Ok(_productService.EditProduct(productDTO));
         }
+
+        [HttpPost("AddToCart")]
+        public IActionResult AddToCart(AddProductToShoppingCartDTO item)
+        {
+            return Ok(_productService.AddToShoppingCart(item.Product, item.Email));
+        }
+
+
     }
 }

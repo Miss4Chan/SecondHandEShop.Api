@@ -14,6 +14,6 @@ namespace Domain.Domain_models
 
         [ForeignKey("ShopApplicationUserId")]
         public ShopApplicationUser ShopApplicationUser { get; set; }
-
+        public virtual List<ProductInShoppingCart> ProductsInShoppingCart { get; set; }
     }
 }

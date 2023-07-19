@@ -12,5 +12,6 @@ namespace Service.Interface
         ProductDTO EditProduct(ProductDTO productDTO);
         ProductDTO CreateProduct(Product product);
         void DeleteProduct(ProductDTO productDTO);
+        public bool AddToShoppingCart(Product product, string email);
     }
 }
