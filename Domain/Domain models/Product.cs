@@ -1,4 +1,5 @@
-﻿using Domain.Identity;
+﻿using Domain.Enums;
+using Domain.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +11,16 @@ namespace Domain.Domain_models
     public class Product : BaseEntity
     {
         public string ProductDescription { get; set; }
+        [Required]
         public string ProductName { get; set; }
+        public ProductType ProductType { get; set; }
+        public string ProductMeasurements { get; set; }
+        public string ProductColor { get; set; }
+        public Size? ProductSize { get; set; } 
+        public int? ProductSizeNumber { get; set; } 
+        public float ProductPrice { get; set; }
+        public bool ProductAvailablity { get; set; }
+        //public IFormFileCollection ProductImages { get; set; }
 
         [ForeignKey("ShopApplicationUserId")]
         public ShopApplicationUser ShopApplicationUser { get; set; }

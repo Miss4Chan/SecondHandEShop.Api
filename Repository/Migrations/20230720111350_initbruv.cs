@@ -2,7 +2,7 @@
 
 namespace Repository.Migrations
 {
-    public partial class SECOND34 : Migration
+    public partial class initbruv : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -70,8 +70,7 @@ namespace Repository.Migrations
                 columns: table => new
                 {
                     ProductId = table.Column<int>(nullable: false),
-                    ShoppingCartId = table.Column<int>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
+                    ShoppingCartId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

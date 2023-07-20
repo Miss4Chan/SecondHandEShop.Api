@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230717231315_SECOND34")]
-    partial class SECOND34
+    [Migration("20230720115700_productChange")]
+    partial class productChange
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,11 +28,33 @@ namespace Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("ProductAvailablity")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ProductColor")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ProductDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductName")
+                    b.Property<string>("ProductMeasurements")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("ProductPrice")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("ProductSize")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductSizeNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductType")
+                        .HasColumnType("int");
 
                     b.Property<int?>("ShopApplicationUserId")
                         .HasColumnType("int");
@@ -50,9 +72,6 @@ namespace Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ShoppingCartId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.HasKey("ProductId", "ShoppingCartId");

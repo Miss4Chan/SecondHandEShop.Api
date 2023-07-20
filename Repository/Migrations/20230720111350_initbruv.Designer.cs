@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230717232155_SECOND345")]
-    partial class SECOND345
+    [Migration("20230720111350_initbruv")]
+    partial class initbruv
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

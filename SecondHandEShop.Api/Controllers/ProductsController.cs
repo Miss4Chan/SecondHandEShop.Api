@@ -1,9 +1,11 @@
 ﻿using Domain.Domain_models;
 using Domain.DTO;
+using Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.Interface;
-
+using System;
+using System.Linq;
 
 namespace SecondHandEShop.Api.Controllers
 {
@@ -16,6 +18,13 @@ namespace SecondHandEShop.Api.Controllers
         public ProductsController(IProductService productService)
         {
             this._productService = productService;
+        }
+
+        [HttpGet("productTypes")]
+        public IActionResult GetProductTypes()
+        {
+            var productTypes = Enum.GetValues(typeof(ProductType)).Cast<ProductType>().Select(x => x.ToString()).ToList();
+            return Ok(productTypes);
         }
 
         [HttpGet]
