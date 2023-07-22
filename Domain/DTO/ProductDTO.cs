@@ -10,6 +10,8 @@ namespace Domain.DTO
         public string ProductDescription { get; set; }
         public string ProductName { get; set; }
         public string ProductType { get; set; }
+        public string ProductSubcategory { get; set; }
+        public string ProductSize { get; set; }
         public string ProductMeasurements { get; set; }
         public string ProductColor { get; set; }
         public int? ProductSizeNumber { get; set; }
@@ -24,6 +26,8 @@ namespace Domain.DTO
             ProductAvailablity = p.ProductAvailablity,
             ProductPrice = p.ProductPrice,
             ProductType = p.ProductType.ToString(),
+            ProductSize = p.ProductSize.ToString(),
+            ProductSubcategory = p.ProductSubcategory.ToString(),
             ProductColor = p.ProductColor,
             ProductMeasurements = p.ProductMeasurements,
             ProductSizeNumber = p.ProductSizeNumber

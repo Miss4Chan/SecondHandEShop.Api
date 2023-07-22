@@ -6,7 +6,7 @@ namespace Domain.Enums
 {
     public enum ProductType
     {
-        TShirt,
+       /* TShirt,
         Blouses,
         Jeans,
         Jackets,
@@ -17,10 +17,11 @@ namespace Domain.Enums
         Sweatshirt,
         Trousers,
         Skirts,
-        Shorts,
+        Shorts, */
         Accessories,
-        Bags,
+        Clothes,
+       // Bags,
         Shoes,
-        SeasonalItems
+      //  SeasonalItems
     }
 }

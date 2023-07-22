@@ -2,7 +2,7 @@
 
 namespace Repository.Migrations
 {
-    public partial class initbruv : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,7 +51,14 @@ namespace Repository.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductDescription = table.Column<string>(nullable: true),
-                    ProductName = table.Column<string>(nullable: true),
+                    ProductName = table.Column<string>(nullable: false),
+                    ProductType = table.Column<int>(nullable: false),
+                    ProductMeasurements = table.Column<string>(nullable: true),
+                    ProductColor = table.Column<string>(nullable: true),
+                    ProductSize = table.Column<int>(nullable: true),
+                    ProductSizeNumber = table.Column<int>(nullable: true),
+                    ProductPrice = table.Column<float>(nullable: false),
+                    ProductAvailablity = table.Column<bool>(nullable: false),
                     ShopApplicationUserId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

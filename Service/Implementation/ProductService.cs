@@ -52,6 +52,13 @@ namespace Service.Implementation
         public List<ProductDTO> GetAllProducts()
         {
             return _context.Products
+                .Select(p => (ProductDTO)p)
+                .ToList();
+        }
+
+        public List<ProductDTO> GetMyProducts()
+        {
+            return _context.Products
                 .Where(p => p.ShopApplicationUser.Id == _user.Id)
                 .Select(p => (ProductDTO)p)
                 .ToList();

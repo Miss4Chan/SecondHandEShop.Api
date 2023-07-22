@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230720111350_initbruv")]
-    partial class initbruv
+    [Migration("20230722102544_lol")]
+    partial class lol
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,11 +28,36 @@ namespace Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("ProductAvailablity")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ProductColor")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ProductDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductName")
+                    b.Property<string>("ProductMeasurements")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("ProductPrice")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("ProductSize")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductSizeNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductSubcategory")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductType")
+                        .HasColumnType("int");
 
                     b.Property<int?>("ShopApplicationUserId")
                         .HasColumnType("int");

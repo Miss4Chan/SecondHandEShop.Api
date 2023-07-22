@@ -51,6 +51,9 @@ namespace Repository.Migrations
                     b.Property<int?>("ProductSizeNumber")
                         .HasColumnType("int");
 
+                    b.Property<int>("ProductSubcategory")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductType")
                         .HasColumnType("int");
 

@@ -27,6 +27,20 @@ namespace SecondHandEShop.Api.Controllers
             return Ok(productTypes);
         }
 
+        [HttpGet("productSizes")]
+        public IActionResult GetProductSizes()
+        {
+            var productSizes = Enum.GetValues(typeof(Size)).Cast<Size>().Select(x => x.ToString()).ToList();
+            return Ok(productSizes);
+        }
+
+        [HttpGet("productSubcategory")]
+        public IActionResult GetProductSubcateogry()
+        {
+            var productSubcategories = Enum.GetValues(typeof(ClothingSubcategory)).Cast<ClothingSubcategory>().Select(x => x.ToString()).ToList();
+            return Ok(productSubcategories);
+        }
+
         [HttpGet]
         public IActionResult GetProducts()
         {
