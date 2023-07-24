@@ -147,8 +147,6 @@ C:\Users\Marija\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcor
 C:\Users\Marija\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\SecondHandEShop.Api.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Marija\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\SecondHandEShop.Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Marija\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\staticwebassets\SecondHandEShop.Api.StaticWebAssets.Manifest.cache
-C:\Users\Marija\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\staticwebassets\SecondHandEShop.Api.StaticWebAssets.xml
-C:\Users\Marija\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\scopedcss\bundle\SecondHandEShop.Api.styles.css
 C:\Users\Marija\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\SecondHandEShop.Api.RazorTargetAssemblyInfo.cache
 C:\Users\Marija\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\SecondHandEShop.Api.csproj.CopyComplete
 C:\Users\Marija\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\SecondHandEShop.Api.dll
@@ -171,3 +169,5 @@ D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netco
 D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
 D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+C:\Users\Marija\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\staticwebassets\SecondHandEShop.Api.StaticWebAssets.xml
+C:\Users\Marija\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\scopedcss\bundle\SecondHandEShop.Api.styles.css

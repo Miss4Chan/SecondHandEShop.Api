@@ -46,6 +46,12 @@ namespace SecondHandEShop.Api.Controllers
         {
             return Ok(_productService.GetAllProducts());
         }
+
+        [HttpGet("myProducts")]
+        public IActionResult GetMyProducts()
+        {
+            return Ok(_productService.GetMyProducts());
+        }
         [HttpGet("{id}",Name ="GetProduct")]
         public IActionResult GetProduct(int id)
         {

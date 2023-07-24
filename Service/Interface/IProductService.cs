@@ -8,6 +8,7 @@ namespace Service.Interface
     public interface IProductService
     {
         List<ProductDTO> GetAllProducts();
+        List<ProductDTO> GetMyProducts();
         ProductDTO GetProduct(int id);
         ProductDTO EditProduct(ProductDTO productDTO);
         ProductDTO CreateProduct(Product product);

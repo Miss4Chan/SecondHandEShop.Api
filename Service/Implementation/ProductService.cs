@@ -1,10 +1,12 @@
 ﻿using Domain.Domain_models;
 using Domain.DTO;
+using Domain.Enums;
 using Domain.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Service.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -44,6 +46,15 @@ namespace Service.Implementation
             var product = _context.Products.First(p => p.ShopApplicationUser.Id == _user.Id && p.Id == productDTO.Id);
             product.ProductDescription = productDTO.ProductDescription;
             product.ProductName = productDTO.ProductName;
+            product.ProductType = (ProductType)Enum.Parse(typeof(ProductType), productDTO.ProductType);
+            product.ProductSizeNumber = productDTO.ProductSizeNumber;
+            product.ProductPrice = productDTO.ProductPrice;
+            product.ProductAvailablity = productDTO.ProductAvailablity;
+            product.ProductColor = productDTO.ProductColor;
+            product.ProductMeasurements = productDTO.ProductMeasurements;
+            product.ProductSize = Enum.TryParse(productDTO.ProductSize, out Size size) ? size : (Size?)null;
+            product.ProductSubcategory = Enum.TryParse(productDTO.ProductSubcategory, out ClothingSubcategory clothing) ? clothing : (ClothingSubcategory?)null;
+
             _context.SaveChanges();
 
             return productDTO;
