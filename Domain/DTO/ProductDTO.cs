@@ -17,6 +17,8 @@ namespace Domain.DTO
         public int? ProductSizeNumber { get; set; }
         public float ProductPrice { get; set; }
         public bool ProductAvailablity { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
 
         public static explicit operator ProductDTO(Product p) => new ProductDTO
         {
@@ -30,7 +32,9 @@ namespace Domain.DTO
             ProductSubcategory = p.ProductSubcategory.ToString(),
             ProductColor = p.ProductColor,
             ProductMeasurements = p.ProductMeasurements,
-            ProductSizeNumber = p.ProductSizeNumber
+            ProductSizeNumber = p.ProductSizeNumber,
+            Username = p.ShopApplicationUser.Username,
+            Email = p.ShopApplicationUser.Email
         };
     }
 }

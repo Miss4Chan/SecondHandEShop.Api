@@ -9,7 +9,6 @@ using System.Linq;
 
 namespace SecondHandEShop.Api.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class ProductsController : ControllerBase

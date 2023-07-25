@@ -43,6 +43,7 @@ namespace SecondHandEShop.Api
             services.AddControllers();
             services.AddDbContext<AppDbContext>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IUserProfileService, UserProfileService>();
             services.AddTransient<IShoppingCartService, ShoppingCartService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IPasswordHasher, PasswordHasher>();

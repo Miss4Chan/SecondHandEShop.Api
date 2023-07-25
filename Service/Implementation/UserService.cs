@@ -42,12 +42,15 @@ namespace Service.Implementation
 
         public async Task<AuthenticatedUserDTO> SignUp(ShopApplicationUser user)
         {
-            var checkUsername = await _context.ShopApplicationUsers
+            var checkEmail = await _context.ShopApplicationUsers
                     .FirstOrDefaultAsync(u => u.Email.Equals(user.Email));
 
-            if (checkUsername != null)
+            var checkUsername = await _context.ShopApplicationUsers
+            .FirstOrDefaultAsync(u => u.Username.Equals(user.Username));
+
+            if (checkUsername != null && checkUsername != null)
             {
-                throw new EmailAlreadyExistsException("User with this Email already exists!");
+                throw new EmailAlreadyExistsException("User with this Email or Username already exists!");
             }
 
             user.Password = _passwordHasher.HashPassword(user.Password);
