@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230722085852_init")]
-    partial class init
+    [Migration("20230726161505_comment")]
+    partial class comment
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,66 @@ namespace Repository.Migrations
                 .HasAnnotation("ProductVersion", "3.1.32")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Domain.Domain_models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CommentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CommenterId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommenterId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Domain.Domain_models.Favourites", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Favourites");
+                });
+
+            modelBuilder.Entity("Domain.Domain_models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
 
             modelBuilder.Entity("Domain.Domain_models.Product", b =>
                 {
@@ -53,6 +113,9 @@ namespace Repository.Migrations
                     b.Property<int?>("ProductSizeNumber")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ProductSubcategory")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductType")
                         .HasColumnType("int");
 
@@ -64,6 +127,39 @@ namespace Repository.Migrations
                     b.HasIndex("ShopApplicationUserId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Domain.Domain_models.ProductInFavourites", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FavouritesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "FavouritesId");
+
+                    b.HasIndex("FavouritesId");
+
+                    b.ToTable("ProductsInFavourites");
+                });
+
+            modelBuilder.Entity("Domain.Domain_models.ProductInOrder", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "OrderId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("ProductsInOrders");
                 });
 
             modelBuilder.Entity("Domain.Domain_models.ProductInShoppingCart", b =>
@@ -121,14 +217,42 @@ namespace Repository.Migrations
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserFavouritesId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("UserShoppingCartId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserFavouritesId");
 
                     b.HasIndex("UserShoppingCartId");
 
                     b.ToTable("ShopApplicationUsers");
+                });
+
+            modelBuilder.Entity("Domain.Domain_models.Comment", b =>
+                {
+                    b.HasOne("Domain.Identity.ShopApplicationUser", "Commenter")
+                        .WithMany()
+                        .HasForeignKey("CommenterId");
+
+                    b.HasOne("Domain.Identity.ShopApplicationUser", "Receiver")
+                        .WithMany()
+                        .HasForeignKey("ReceiverId");
+                });
+
+            modelBuilder.Entity("Domain.Domain_models.Order", b =>
+                {
+                    b.HasOne("Domain.Identity.ShopApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Domain_models.Product", b =>
@@ -136,6 +260,36 @@ namespace Repository.Migrations
                     b.HasOne("Domain.Identity.ShopApplicationUser", "ShopApplicationUser")
                         .WithMany()
                         .HasForeignKey("ShopApplicationUserId");
+                });
+
+            modelBuilder.Entity("Domain.Domain_models.ProductInFavourites", b =>
+                {
+                    b.HasOne("Domain.Domain_models.Favourites", "Favourites")
+                        .WithMany("ProductsInFavourites")
+                        .HasForeignKey("FavouritesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Domain_models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Domain_models.ProductInOrder", b =>
+                {
+                    b.HasOne("Domain.Domain_models.Order", "Order")
+                        .WithMany("ProductsInOrder")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Domain_models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Domain_models.ProductInShoppingCart", b =>
@@ -155,6 +309,10 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Domain.Identity.ShopApplicationUser", b =>
                 {
+                    b.HasOne("Domain.Domain_models.Favourites", "UserFavourites")
+                        .WithMany()
+                        .HasForeignKey("UserFavouritesId");
+
                     b.HasOne("Domain.Domain_models.ShoppingCart", "UserShoppingCart")
                         .WithMany()
                         .HasForeignKey("UserShoppingCartId");

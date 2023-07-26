@@ -19,6 +19,34 @@ namespace Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Domain.Domain_models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CommentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CommenterId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommenterId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Domain.Domain_models.Favourites", b =>
                 {
                     b.Property<int>("Id")
@@ -203,6 +231,17 @@ namespace Repository.Migrations
                     b.HasIndex("UserShoppingCartId");
 
                     b.ToTable("ShopApplicationUsers");
+                });
+
+            modelBuilder.Entity("Domain.Domain_models.Comment", b =>
+                {
+                    b.HasOne("Domain.Identity.ShopApplicationUser", "Commenter")
+                        .WithMany()
+                        .HasForeignKey("CommenterId");
+
+                    b.HasOne("Domain.Identity.ShopApplicationUser", "Receiver")
+                        .WithMany()
+                        .HasForeignKey("ReceiverId");
                 });
 
             modelBuilder.Entity("Domain.Domain_models.Order", b =>

@@ -22,6 +22,7 @@ namespace Repository
         public DbSet<ProductInFavourites> ProductsInFavourites { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<ProductInOrder> ProductsInOrders { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder)
         {

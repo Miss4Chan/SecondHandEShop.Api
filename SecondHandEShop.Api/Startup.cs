@@ -50,6 +50,7 @@ namespace SecondHandEShop.Api
             services.AddTransient<IFavouritesService, FavouritesService>();
             services.AddTransient<IPasswordHasher, PasswordHasher>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<ICommentService, CommentService>();
             services.AddSwaggerDocument(settings =>
             {
                 settings.Title = "Second Hand EShop";
