@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230726110929_order2")]
+    partial class order2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,12 +43,15 @@ namespace Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("UserId")
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId1")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Orders");
                 });
@@ -107,9 +112,14 @@ namespace Repository.Migrations
                     b.Property<int>("FavouritesId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ShoppingCartId")
+                        .HasColumnType("int");
+
                     b.HasKey("ProductId", "FavouritesId");
 
                     b.HasIndex("FavouritesId");
+
+                    b.HasIndex("ShoppingCartId");
 
                     b.ToTable("ProductsInFavourites");
                 });
@@ -187,9 +197,6 @@ namespace Repository.Migrations
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserFavouritesId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("UserShoppingCartId")
                         .HasColumnType("int");
 
@@ -197,8 +204,6 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserFavouritesId");
 
                     b.HasIndex("UserShoppingCartId");
 
@@ -209,9 +214,7 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Domain.Identity.ShopApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("Domain.Domain_models.Product", b =>
@@ -234,6 +237,10 @@ namespace Repository.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Domain.Domain_models.ShoppingCart", null)
+                        .WithMany("ProductsInFavourites")
+                        .HasForeignKey("ShoppingCartId");
                 });
 
             modelBuilder.Entity("Domain.Domain_models.ProductInOrder", b =>
@@ -268,10 +275,6 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Domain.Identity.ShopApplicationUser", b =>
                 {
-                    b.HasOne("Domain.Domain_models.Favourites", "UserFavourites")
-                        .WithMany()
-                        .HasForeignKey("UserFavouritesId");
-
                     b.HasOne("Domain.Domain_models.ShoppingCart", "UserShoppingCart")
                         .WithMany()
                         .HasForeignKey("UserShoppingCartId");

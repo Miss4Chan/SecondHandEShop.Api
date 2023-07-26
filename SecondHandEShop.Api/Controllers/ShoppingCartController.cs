@@ -16,9 +16,12 @@ namespace SecondHandEShop.Api.Controllers
     public class ShoppingCartController : ControllerBase
     {
         private IShoppingCartService _shoppingCartService;
-        public ShoppingCartController(IShoppingCartService shoppingCartService)
+
+        private IOrderService _orderService;
+        public ShoppingCartController(IShoppingCartService shoppingCartService, IOrderService orderService)
         {
             this._shoppingCartService = shoppingCartService;
+            this._orderService = orderService;
         }
 
         [HttpGet]
@@ -33,5 +36,12 @@ namespace SecondHandEShop.Api.Controllers
 
             return Ok(_shoppingCartService.deleteProductFromShoppingCart(email, product));
             }
+
+        [HttpGet("Order")]
+        public IActionResult OrderNow(string email)
+        {
+            return Ok(_shoppingCartService.OrderNow(email));
+        }
     }
 }
+

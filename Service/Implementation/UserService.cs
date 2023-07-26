@@ -60,12 +60,16 @@ namespace Service.Implementation
                 UserId = user.Id
             };
 
-            user.UserShoppingCart = userShoppingCart; 
+            user.UserShoppingCart = userShoppingCart;
+
+            var userFavouries = new Favourites
+            {
+                UserId = user.Id
+            };
+
+            user.UserFavourites = userFavouries;
 
             await _context.AddAsync(user);
-            await _context.SaveChangesAsync();
-
-
             await _context.SaveChangesAsync();
 
             return new AuthenticatedUserDTO

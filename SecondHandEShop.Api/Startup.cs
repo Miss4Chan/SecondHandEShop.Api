@@ -46,6 +46,8 @@ namespace SecondHandEShop.Api
             services.AddTransient<IUserProfileService, UserProfileService>();
             services.AddTransient<IShoppingCartService, ShoppingCartService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IFavouritesService, FavouritesService>();
             services.AddTransient<IPasswordHasher, PasswordHasher>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSwaggerDocument(settings =>

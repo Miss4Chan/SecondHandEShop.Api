@@ -117,5 +117,38 @@ namespace Service.Implementation
             return false;
         }
 
+        public bool AddToFavourites(Product product, string email)
+        {
+            var user = _context.ShopApplicationUsers
+                .Include(u => u.UserFavourites) 
+                .ThenInclude(u => u.ProductsInFavourites)
+                .FirstOrDefault(user => user.Email == email);
+
+            var userFavourites = user.UserFavourites;
+
+            if (userFavourites != null && product != null)
+            {
+                var isAlreadyAdded = userFavourites.ProductsInFavourites.FirstOrDefault(p => p.ProductId == product.Id);
+
+                if (isAlreadyAdded == null)
+                {
+                    _context.Attach(product);
+                    var productInFavourites = new ProductInFavourites
+                    {
+                        Favourites = userFavourites,
+                        Product = product,
+                        FavouritesId = userFavourites.Id,
+                        ProductId = product.Id
+                    };
+
+                    _context.ProductsInFavourites.Add(productInFavourites);
+                    _context.SaveChanges();
+                }
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }

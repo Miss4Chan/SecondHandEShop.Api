@@ -1,7 +1,9 @@
-﻿using Domain.DTO;
+﻿using Domain.Domain_models;
+using Domain.DTO;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Service.Interface;
+using System.Collections.Generic;
 using System.Linq;
 
 
@@ -17,9 +19,6 @@ namespace Service.Implementation
         }
         public ShoppingCartDTO getShoppingCartInfo(string email)
         {
-
-            var loggedInUser2 = _context.ShopApplicationUsers.Where(u => u.Email == email).FirstOrDefault();
-            var mail = email;
             var loggedInUser = _context.ShopApplicationUsers.Where(u => u.Email == email)
                 .Include(z => z.UserShoppingCart)
               .Include("UserShoppingCart.ProductsInShoppingCart")
@@ -30,18 +29,13 @@ namespace Service.Implementation
 
             var productsList = userCart.ProductsInShoppingCart.ToList();
 
-          /* var ticketPrices = ticketsList.Select(z => new
-            {
-                TicketPrice = z.Ticket.Price,
-            }).ToList(); */
-
             double totalPrice = 0.0;
 
-           /* foreach (var item in ticketPrices)
+            foreach (var item in productsList)
             {
-                totalPrice += item.Quantity * item.TicketPrice;
+                totalPrice += item.Product.ProductPrice;
             }
-           */
+
             var result = new ShoppingCartDTO
             {
                 ProductsInShoppingCart = productsList,
@@ -72,5 +66,51 @@ namespace Service.Implementation
                 return false;
             }
         }
+
+        public bool OrderNow(string email)
+        {
+            var loggedInUser = _context.ShopApplicationUsers.Where(u => u.Email == email)
+            .Include(z => z.UserShoppingCart)
+            .Include("UserShoppingCart.ProductsInShoppingCart")
+            .Include("UserShoppingCart.ProductsInShoppingCart.Product")
+             .FirstOrDefault();
+            var userCard = loggedInUser.UserShoppingCart;
+
+            Order order = new Order
+            {
+                User = loggedInUser,
+                UserId = loggedInUser.Id
+            };
+
+            this._context.Orders.Add(order);
+
+            List<ProductInOrder> productsInOrder = new List<ProductInOrder>();
+
+            var result = userCard.ProductsInShoppingCart.Select(z => new ProductInOrder
+            {
+                ProductId = z.ProductId,
+                Product = z.Product,
+                OrderId = order.Id,
+                Order = order
+            }).ToList();
+
+            productsInOrder.AddRange(result);
+
+            foreach (var item in productsInOrder)
+            {
+                this._context.ProductsInOrders.Add(item);
+                var product = item.Product;
+                product.ProductAvailablity = false;
+                this._context.Products.Update(product);
+            }
+
+            loggedInUser.UserShoppingCart.ProductsInShoppingCart.Clear();
+
+            this._context.ShopApplicationUsers.Update(loggedInUser);
+            this._context.SaveChanges();
+            return true;
+
+        }
     }
 }
+

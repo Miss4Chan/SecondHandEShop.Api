@@ -12,5 +12,6 @@ namespace Domain.Identity
         public string Phone { get; set; }
         public string Address { get; set; }
         public virtual ShoppingCart UserShoppingCart { get; set; }
+        public virtual Favourites UserFavourites { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace Service.Implementation
         }
         public UserDTO GetMyProfile()
         {
+
             UserDTO userDTO = new UserDTO
             {
                 Name = _user.Name,
@@ -36,6 +37,8 @@ namespace Service.Implementation
         public UserDTO GetProfile(string username)
         {
             var user = _context.ShopApplicationUsers.FirstOrDefault(u => u.Username == username);
+            var productList = _context.Products.Where(p => p.ShopApplicationUser.Id == user.Id).Select(p => (ProductDTO)p).ToList(); ;
+
 
             if (user != null)
             {
@@ -46,7 +49,8 @@ namespace Service.Implementation
                     Phone = user.Phone,
                     Address = user.Address,
                     Email = user.Email,
-                    Username = user.Username
+                    Username = user.Username,
+                    Products = productList
                 };
 
                 return userDTO;

@@ -9,5 +9,6 @@ namespace Service.Interface
     {
         ShoppingCartDTO getShoppingCartInfo(string email);
         bool deleteProductFromShoppingCart(string email, int productId);
+        bool OrderNow(string userId);
     }
 }

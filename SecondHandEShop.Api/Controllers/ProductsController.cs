@@ -77,11 +77,15 @@ namespace SecondHandEShop.Api.Controllers
         }
 
         [HttpPost("AddToCart")]
-        public IActionResult AddToCart(AddProductToShoppingCartDTO item)
+        public IActionResult AddToCart(AddProductToShoppingCartOrFavouritesDTO item)
         {
             return Ok(_productService.AddToShoppingCart(item.Product, item.Email));
         }
 
-
+        [HttpPost("AddToFavourites")]
+        public IActionResult AddToFavourites(AddProductToShoppingCartOrFavouritesDTO item)
+        {
+            return Ok(_productService.AddToFavourites(item.Product, item.Email));
+        }
     }
 }
