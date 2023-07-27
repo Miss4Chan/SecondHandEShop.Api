@@ -18,10 +18,15 @@ namespace Service.Implementation
             _context = context;
         }
 
-        public CommentDTO AddComment( CommentDTO comment)
+        public CommentDTO AddComment( CommentDTO comment, int rating)
         {
             var commenter = _context.ShopApplicationUsers.FirstOrDefault(u => u.Username == comment.CommenterUsername);
             var receiver = _context.ShopApplicationUsers.FirstOrDefault(u => u.Username == comment.ReceiverUsername);
+            if(rating !=null)
+            {
+                receiver.UserRatingCount += 1;
+                receiver.UserRating = (receiver.UserRating + rating) / receiver.UserRatingCount;
+            }
 
             if (commenter == null || receiver == null)
             {
@@ -41,6 +46,7 @@ namespace Service.Implementation
 
             return (CommentDTO)newComment;
         }
+
 
         public bool DeleteComment(int commentId)
         {

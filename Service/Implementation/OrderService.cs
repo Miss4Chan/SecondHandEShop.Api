@@ -30,5 +30,11 @@ namespace Service.Implementation
                 .Include(z => z.ProductsInOrder)
                 .Include("ProductsInOrder.Product").ToList();
         }
+        public List<Order> GetMyOrders(string username)
+        {
+            return this._context.Orders.Include(z => z.User).Where(u => u.User.Username == username)
+                .Include(z => z.ProductsInOrder)
+                .Include("ProductsInOrder.Product").ToList();
+        }
     }
 }

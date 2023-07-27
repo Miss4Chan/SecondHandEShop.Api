@@ -17,11 +17,11 @@ namespace SecondHandEShop.Api.Controllers
         }
 
         [HttpPost("addComment")]
-        public IActionResult AddComment([FromBody] CommentDTO commentDTO)
+        public IActionResult AddComment([FromBody] CommentDTO commentDTO, int rating)
         {
             try
             {
-                var addedComment = _commentService.AddComment( commentDTO);
+                var addedComment = _commentService.AddComment( commentDTO, rating);
                 return Ok(addedComment);
             }
             catch (ArgumentException ex)

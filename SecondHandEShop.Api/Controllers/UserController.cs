@@ -14,6 +14,7 @@ namespace SecondHandEShop.Api.Controllers
     public class UserController : ControllerBase
     {
         private IUserProfileService _userService;
+
         public UserController(IUserProfileService userService)
         {
             this._userService = userService;

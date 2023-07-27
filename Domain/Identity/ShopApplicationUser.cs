@@ -13,5 +13,7 @@ namespace Domain.Identity
         public string Address { get; set; }
         public virtual ShoppingCart UserShoppingCart { get; set; }
         public virtual Favourites UserFavourites { get; set; }
+        public int UserRatingCount { get; set; }
+        public double UserRating { get; set; }
     }
 }

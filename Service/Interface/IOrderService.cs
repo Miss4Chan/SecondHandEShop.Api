@@ -9,5 +9,6 @@ namespace Service.Interface
     {
         List<Order> GetAllOrders();
         Order GetOrderDetails(int orderId);
+        public List<Order> GetMyOrders(string username);
     }
 }
