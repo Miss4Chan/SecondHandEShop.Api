@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230727133416_gluposti")]
-    partial class gluposti
+    [Migration("20230727164107_addedProductFields")]
+    partial class addedProductFields
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -88,13 +88,22 @@ namespace Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Condition")
+                        .HasColumnType("int");
+
                     b.Property<bool>("ProductAvailablity")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ProductBrand")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductColor")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductMaterial")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductMeasurements")

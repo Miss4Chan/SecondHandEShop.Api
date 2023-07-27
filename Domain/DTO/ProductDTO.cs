@@ -16,6 +16,10 @@ namespace Domain.DTO
         public string ProductColor { get; set; }
         public int? ProductSizeNumber { get; set; }
         public float ProductPrice { get; set; }
+        public string ProductCondition { get; set; }
+        public string ProductMaterial { get; set; } 
+        public string ProductBrand { get; set; }
+
         public bool ProductAvailablity { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
@@ -34,7 +38,10 @@ namespace Domain.DTO
             ProductMeasurements = p.ProductMeasurements,
             ProductSizeNumber = p.ProductSizeNumber,
             Username = p.ShopApplicationUser.Username,
-            Email = p.ShopApplicationUser.Email
+            Email = p.ShopApplicationUser.Email,
+            ProductBrand = p.ProductBrand,
+            ProductCondition = p.Condition.ToString(),
+            ProductMaterial = p.ProductMaterial,
         };
     }
 }

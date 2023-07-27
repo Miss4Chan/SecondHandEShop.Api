@@ -15,6 +15,9 @@ namespace Domain.Domain_models
         public string ProductName { get; set; }
         public ProductType ProductType { get; set; }
         public string ProductMeasurements { get; set; }
+        public string ProductBrand { get; set; }
+        public string ProductMaterial { get; set; }
+        public Condition Condition { get; set; }
         public string ProductColor { get; set; }
         public ClothingSubcategory? ProductSubcategory { get; set; }
         public Size? ProductSize { get; set; } 

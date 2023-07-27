@@ -3,6 +3,7 @@ using Domain.DTO;
 using Domain.Enums;
 using Domain.Identity;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Service.Interface;
@@ -58,6 +59,49 @@ namespace Service.Implementation
             _context.SaveChanges();
 
             return productDTO;
+        }
+
+        public List<ProductDTO> GetFilteredProducts(string searchTerm, string colorFilter, string sizeFilter, string conditionFilter, string sortByPrice)
+        {
+            var products = _context.Products.ToList();
+
+            // Filter by productName
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                products = products.Where(p => p.ProductName.ToLower().Contains(searchTerm.ToLower())).ToList();
+            }
+
+            // Filter by color
+            if (!string.IsNullOrEmpty(colorFilter))
+            {
+                products = products.Where(p => p.ProductColor == colorFilter).ToList();
+            }
+
+            // Filter by size
+            if (!string.IsNullOrEmpty(sizeFilter) && Enum.TryParse<Size>(sizeFilter, out var size))
+            {
+                products = products.Where(p => p.ProductSize == size).ToList();
+            }
+
+
+            // Filter by condition
+            if (!string.IsNullOrEmpty(conditionFilter) && Enum.TryParse<Condition>(conditionFilter, out var condition))
+            {
+                products = products.Where(p => p.Condition == condition).ToList();
+            }
+
+            // Sort by price (ascending order)
+            if (sortByPrice?.ToLower() == "desc")
+            {
+                products = products.OrderByDescending(p => p.ProductPrice).ToList();
+            }
+            else if (sortByPrice?.ToLower() == "asc")
+            {
+                products = products.OrderBy(p => p.ProductPrice).ToList();
+            }
+
+            var productsDTO = products.Select(p => (ProductDTO)p).ToList();
+            return productsDTO;
         }
 
         public List<ProductDTO> GetAllProducts()

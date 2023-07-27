@@ -18,6 +18,12 @@ namespace SecondHandEShop.Api.Controllers
         {
             this._productService = productService;
         }
+        [HttpGet("productConditions")]
+        public IActionResult GetConditionTypes()
+        {
+            var conditionTypes = Enum.GetValues(typeof(Condition)).Cast<Condition>().Select(x => x.ToString()).ToList();
+            return Ok(conditionTypes);
+        }
 
         [HttpGet("productTypes")]
         public IActionResult GetProductTypes()
@@ -38,6 +44,13 @@ namespace SecondHandEShop.Api.Controllers
         {
             var productSubcategories = Enum.GetValues(typeof(ClothingSubcategory)).Cast<ClothingSubcategory>().Select(x => x.ToString()).ToList();
             return Ok(productSubcategories);
+        }
+
+        [HttpGet("Filtered")]
+        public IActionResult GetFilteredProducts(string searchTerm = "", string colorFilter = "", string sizeFilter = "", string conditionFilter = "", string sortByPrice = "")
+        {
+
+            return Ok(_productService.GetFilteredProducts(searchTerm, colorFilter, sizeFilter, conditionFilter, sortByPrice));
         }
 
         [HttpGet]

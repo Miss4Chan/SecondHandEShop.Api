@@ -15,5 +15,6 @@ namespace Service.Interface
         void DeleteProduct(ProductDTO productDTO);
         public bool AddToShoppingCart(Product product, string email);
         public bool AddToFavourites(Product product, string email);
+        public List<ProductDTO> GetFilteredProducts(string searchTerm, string colorFilter, string sizeFilter, string conditionFilter, string sortByPrice);
     }
 }

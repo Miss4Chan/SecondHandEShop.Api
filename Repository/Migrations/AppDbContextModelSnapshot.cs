@@ -86,13 +86,22 @@ namespace Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Condition")
+                        .HasColumnType("int");
+
                     b.Property<bool>("ProductAvailablity")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ProductBrand")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductColor")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductMaterial")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductMeasurements")

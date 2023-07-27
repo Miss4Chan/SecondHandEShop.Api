@@ -171,3 +171,8 @@ D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netco
 D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\SecondHandEShop.Api.dll
 D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\SecondHandEShop.Api.pdb
 D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\SecondHandEShop.Api.genruntimeconfig.cache
+D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\staticwebassets\SecondHandEShop.Api.StaticWebAssets.Pack.cache
+D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.SecondHandEShop.Api.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.build.SecondHandEShop.Api.props
+D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildMultiTargeting.SecondHandEShop.Api.props
+D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildTransitive.SecondHandEShop.Api.props

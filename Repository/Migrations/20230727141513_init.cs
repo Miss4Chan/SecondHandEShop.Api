@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Repository.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,7 +49,8 @@ namespace Repository.Migrations
                     UserShoppingCartId = table.Column<int>(nullable: true),
                     UserFavouritesId = table.Column<int>(nullable: true),
                     UserRatingCount = table.Column<int>(nullable: false),
-                    UserRating = table.Column<double>(nullable: false)
+                    UserRating = table.Column<double>(nullable: false),
+                    UserRatingTotal = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
