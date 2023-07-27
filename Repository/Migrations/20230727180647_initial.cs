@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Repository.Migrations
 {
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -126,6 +126,9 @@ namespace Repository.Migrations
                     ProductName = table.Column<string>(nullable: false),
                     ProductType = table.Column<int>(nullable: false),
                     ProductMeasurements = table.Column<string>(nullable: true),
+                    ProductBrand = table.Column<string>(nullable: true),
+                    ProductMaterial = table.Column<string>(nullable: true),
+                    Condition = table.Column<int>(nullable: false),
                     ProductColor = table.Column<string>(nullable: true),
                     ProductSubcategory = table.Column<int>(nullable: true),
                     ProductSize = table.Column<int>(nullable: true),

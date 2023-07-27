@@ -46,17 +46,11 @@ namespace SecondHandEShop.Api.Controllers
             return Ok(productSubcategories);
         }
 
-        [HttpGet("Filtered")]
-        public IActionResult GetFilteredProducts(string searchTerm = "", string colorFilter = "", string sizeFilter = "", string conditionFilter = "", string sortByPrice = "")
-        {
-
-            return Ok(_productService.GetFilteredProducts(searchTerm, colorFilter, sizeFilter, conditionFilter, sortByPrice));
-        }
-
         [HttpGet]
-        public IActionResult GetProducts()
+        public IActionResult GetProducts(string searchTerm = "", string colorFilter = "", string sizeFilter = "", string conditionFilter = "", string sortByPrice = "")
         {
-            return Ok(_productService.GetAllProducts());
+
+            return Ok(_productService.GetProducts(searchTerm, colorFilter, sizeFilter, conditionFilter, sortByPrice));
         }
 
         [HttpGet("myProducts")]

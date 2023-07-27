@@ -61,7 +61,7 @@ namespace Service.Implementation
             return productDTO;
         }
 
-        public List<ProductDTO> GetFilteredProducts(string searchTerm, string colorFilter, string sizeFilter, string conditionFilter, string sortByPrice)
+        public List<ProductDTO> GetProducts(string searchTerm, string colorFilter, string sizeFilter, string conditionFilter, string sortByPrice)
         {
             var products = _context.Products.ToList();
 
@@ -102,13 +102,6 @@ namespace Service.Implementation
 
             var productsDTO = products.Select(p => (ProductDTO)p).ToList();
             return productsDTO;
-        }
-
-        public List<ProductDTO> GetAllProducts()
-        {
-            return _context.Products
-                .Select(p => (ProductDTO)p)
-                .ToList();
         }
 
         public List<ProductDTO> GetMyProducts()
