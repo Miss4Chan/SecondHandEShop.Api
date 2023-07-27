@@ -12,6 +12,10 @@ namespace Domain.DTO
         public string Phone { get; set; }
         public string Address { get; set; }
         public string Username { get; set; }
+        public int RatingCount { get; set; }
+        public double Rating { get; set; }
         public virtual List<ProductDTO> Products { get; set; }
+        public virtual List<CommentDTO> Comments { get; set; }
+
     }
 }

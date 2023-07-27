@@ -20,12 +20,14 @@ namespace Service.Implementation
 
         public CommentDTO AddComment( CommentDTO comment, int rating)
         {
-            var commenter = _context.ShopApplicationUsers.FirstOrDefault(u => u.Username == comment.CommenterUsername);
-            var receiver = _context.ShopApplicationUsers.FirstOrDefault(u => u.Username == comment.ReceiverUsername);
+            var commenter = _context.ShopApplicationUsers.FirstOrDefault(u => u.Email == comment.CommenterUsername);
+            var receiver = _context.ShopApplicationUsers.FirstOrDefault(u => u.Email == comment.ReceiverUsername);
+            
             if(rating !=null)
             {
                 receiver.UserRatingCount += 1;
-                receiver.UserRating = (receiver.UserRating + rating) / receiver.UserRatingCount;
+                receiver.UserRatingTotal += rating;
+                receiver.UserRating = receiver.UserRatingTotal / receiver.UserRatingCount;
             }
 
             if (commenter == null || receiver == null)

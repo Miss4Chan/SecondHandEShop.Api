@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230727095029_rating")]
-    partial class rating
+    [Migration("20230727133416_gluposti")]
+    partial class gluposti
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,6 +224,9 @@ namespace Repository.Migrations
                         .HasColumnType("float");
 
                     b.Property<int>("UserRatingCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserRatingTotal")
                         .HasColumnType("int");
 
                     b.Property<int?>("UserShoppingCartId")

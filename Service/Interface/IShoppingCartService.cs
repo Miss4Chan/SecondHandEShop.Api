@@ -1,4 +1,5 @@
-﻿using Domain.DTO;
+﻿using Domain.Domain_models;
+using Domain.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,6 @@ namespace Service.Interface
     {
         ShoppingCartDTO getShoppingCartInfo(string email);
         bool deleteProductFromShoppingCart(string email, int productId);
-        bool OrderNow(string userId);
+        Order OrderNow(string userId);
     }
 }

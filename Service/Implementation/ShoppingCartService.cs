@@ -67,7 +67,7 @@ namespace Service.Implementation
             }
         }
 
-        public bool OrderNow(string email)
+        public Order OrderNow(string email)
         {
             var loggedInUser = _context.ShopApplicationUsers.Where(u => u.Email == email)
             .Include(z => z.UserShoppingCart)
@@ -108,7 +108,7 @@ namespace Service.Implementation
 
             this._context.ShopApplicationUsers.Update(loggedInUser);
             this._context.SaveChanges();
-            return true;
+            return order;
 
         }
     }

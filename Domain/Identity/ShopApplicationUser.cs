@@ -15,5 +15,6 @@ namespace Domain.Identity
         public virtual Favourites UserFavourites { get; set; }
         public int UserRatingCount { get; set; }
         public double UserRating { get; set; }
+        public int UserRatingTotal { get; set; }
     }
 }

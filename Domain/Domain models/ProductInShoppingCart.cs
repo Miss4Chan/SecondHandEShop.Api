@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Domain.DTO;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Domain_models
 {

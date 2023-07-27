@@ -224,6 +224,9 @@ namespace Repository.Migrations
                     b.Property<int>("UserRatingCount")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserRatingTotal")
+                        .HasColumnType("int");
+
                     b.Property<int?>("UserShoppingCartId")
                         .HasColumnType("int");
 

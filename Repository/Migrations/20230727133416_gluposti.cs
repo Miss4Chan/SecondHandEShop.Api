@@ -2,18 +2,12 @@
 
 namespace Repository.Migrations
 {
-    public partial class rating : Migration
+    public partial class gluposti : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<double>(
-                name: "UserRating",
-                table: "ShopApplicationUsers",
-                nullable: false,
-                defaultValue: 0.0);
-
             migrationBuilder.AddColumn<int>(
-                name: "UserRatingCount",
+                name: "UserRatingTotal",
                 table: "ShopApplicationUsers",
                 nullable: false,
                 defaultValue: 0);
@@ -22,11 +16,7 @@ namespace Repository.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "UserRating",
-                table: "ShopApplicationUsers");
-
-            migrationBuilder.DropColumn(
-                name: "UserRatingCount",
+                name: "UserRatingTotal",
                 table: "ShopApplicationUsers");
         }
     }

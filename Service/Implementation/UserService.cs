@@ -68,6 +68,9 @@ namespace Service.Implementation
             };
 
             user.UserFavourites = userFavouries;
+            user.UserRatingCount = 0;
+            user.UserRating = 0;
+            user.UserRatingTotal = 0;
 
             await _context.AddAsync(user);
             await _context.SaveChangesAsync();

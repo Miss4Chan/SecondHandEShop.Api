@@ -20,9 +20,9 @@ namespace SecondHandEShop.Api.Controllers
 
 
         [HttpGet("myOrders")]
-        public IActionResult GetMyOrders(string username)
+        public IActionResult GetMyOrders(string email)
         {
-            return Ok(_orderService.GetMyOrders(username));
+            return Ok(_orderService.GetMyOrders(email));
         }
 
         [HttpGet("{orderId}")]

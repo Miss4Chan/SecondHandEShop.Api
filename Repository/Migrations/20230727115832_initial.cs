@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Repository.Migrations
 {
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,7 +47,9 @@ namespace Repository.Migrations
                     Phone = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
                     UserShoppingCartId = table.Column<int>(nullable: true),
-                    UserFavouritesId = table.Column<int>(nullable: true)
+                    UserFavouritesId = table.Column<int>(nullable: true),
+                    UserRatingCount = table.Column<int>(nullable: false),
+                    UserRating = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,6 +64,34 @@ namespace Repository.Migrations
                         name: "FK_ShopApplicationUsers_ShoppingCarts_UserShoppingCartId",
                         column: x => x.UserShoppingCartId,
                         principalTable: "ShoppingCarts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Content = table.Column<string>(nullable: true),
+                    CommenterId = table.Column<int>(nullable: true),
+                    ReceiverId = table.Column<int>(nullable: true),
+                    CommentDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_ShopApplicationUsers_CommenterId",
+                        column: x => x.CommenterId,
+                        principalTable: "ShopApplicationUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comments_ShopApplicationUsers_ReceiverId",
+                        column: x => x.ReceiverId,
+                        principalTable: "ShopApplicationUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -187,6 +218,16 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_CommenterId",
+                table: "Comments",
+                column: "CommenterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_ReceiverId",
+                table: "Comments",
+                column: "ReceiverId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserId",
                 table: "Orders",
                 column: "UserId");
@@ -224,6 +265,9 @@ namespace Repository.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Comments");
+
             migrationBuilder.DropTable(
                 name: "ProductsInFavourites");
 

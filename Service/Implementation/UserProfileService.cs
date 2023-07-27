@@ -37,7 +37,8 @@ namespace Service.Implementation
         public UserDTO GetProfile(string username)
         {
             var user = _context.ShopApplicationUsers.FirstOrDefault(u => u.Username == username);
-            var productList = _context.Products.Where(p => p.ShopApplicationUser.Id == user.Id).Select(p => (ProductDTO)p).ToList(); ;
+            var productList = _context.Products.Where(p => p.ShopApplicationUser.Id == user.Id).Select(p => (ProductDTO)p).ToList(); 
+            var comments = _context.Comments.Where(c => c.Receiver.Username == username).Select(c => (CommentDTO)c).ToList();
 
 
             if (user != null)
@@ -50,7 +51,10 @@ namespace Service.Implementation
                     Address = user.Address,
                     Email = user.Email,
                     Username = user.Username,
-                    Products = productList
+                    Products = productList,
+                    Rating = user.UserRating,
+                    RatingCount = user.UserRatingCount,
+                    Comments = comments
                 };
 
                 return userDTO;

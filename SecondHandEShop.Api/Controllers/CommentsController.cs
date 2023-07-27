@@ -17,7 +17,7 @@ namespace SecondHandEShop.Api.Controllers
         }
 
         [HttpPost("addComment")]
-        public IActionResult AddComment([FromBody] CommentDTO commentDTO, int rating)
+        public IActionResult AddComment([FromBody] CommentDTO commentDTO, [FromQuery] int rating)
         {
             try
             {

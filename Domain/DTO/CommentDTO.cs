@@ -12,6 +12,7 @@ namespace Domain.DTO
         public DateTime CommentDate { get; set; }
         public string CommenterUsername { get; set; }
         public string ReceiverUsername { get; set; }
+
         public static explicit operator CommentDTO(Comment c) => new CommentDTO
         {
             Id = c.Id,
