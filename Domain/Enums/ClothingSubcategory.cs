@@ -6,7 +6,7 @@ namespace Domain.Enums
 {
     public enum ClothingSubcategory
     {
-         TShirt,
+         TShirts,
          Blouses,
          Jeans,
          Jackets,
@@ -14,11 +14,9 @@ namespace Domain.Enums
          Dresses,
          Shirts,
          Tops,
-         Sweatshirt,
+         Sweatshirts,
          Trousers,
          Skirts,
-         Shorts,
-         Bags,
-         SeasonalItems
+         Shorts
     }
 }

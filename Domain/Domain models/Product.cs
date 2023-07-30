@@ -25,7 +25,7 @@ namespace Domain.Domain_models
         public float ProductPrice { get; set; }
         public bool ProductAvailablity { get; set; }
         //public IFormFileCollection ProductImages { get; set; }
-
+        public Sex ProductSex { get; set; }
         [ForeignKey("ShopApplicationUserId")]
         public ShopApplicationUser ShopApplicationUser { get; set; }
         public virtual List<ProductInShoppingCart> ProductsInShoppingCart { get; set; }

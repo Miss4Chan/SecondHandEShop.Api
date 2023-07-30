@@ -43,3 +43,6 @@ C:\Users\Marija\De\SecondHandEShop.Api\Service\obj\Debug\netcoreapp3.1\Service.c
 C:\Users\Marija\De\SecondHandEShop.Api\Service\obj\Debug\netcoreapp3.1\Service.csproj.CopyComplete
 C:\Users\Marija\De\SecondHandEShop.Api\Service\obj\Debug\netcoreapp3.1\Service.dll
 C:\Users\Marija\De\SecondHandEShop.Api\Service\obj\Debug\netcoreapp3.1\Service.pdb
+C:\Users\Marija\De\SecondHandEShop.Api\Service\bin\Debug\netcoreapp3.1\Service.runtimeconfig.json
+C:\Users\Marija\De\SecondHandEShop.Api\Service\bin\Debug\netcoreapp3.1\Service.runtimeconfig.dev.json
+C:\Users\Marija\De\SecondHandEShop.Api\Service\obj\Debug\netcoreapp3.1\Service.genruntimeconfig.cache

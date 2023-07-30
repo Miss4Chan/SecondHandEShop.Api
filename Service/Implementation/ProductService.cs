@@ -9,6 +9,7 @@ using Repository;
 using Service.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Mapping;
 using System.Linq;
 
 
@@ -61,9 +62,38 @@ namespace Service.Implementation
             return productDTO;
         }
 
-        public List<ProductDTO> GetProducts(string searchTerm, string colorFilter, string sizeFilter, string conditionFilter, string sortByPrice)
+        public List<ProductDTO> GetProducts(string type, string sex, string subcategory, string searchTerm, string colorFilter, string sizeFilter, string conditionFilter, string sortByPrice, string sortByUserRating, string shoeNumberRange)
         {
-            var products = _context.Products.ToList();
+            var products = _context.Products.Include(p => p.ShopApplicationUser).ToList();
+
+            //Filter by type
+            if (!string.IsNullOrEmpty(type) && Enum.TryParse<ProductType>(type, out var productType))
+            {
+                products = products.Where(p => p.ProductType== productType).ToList();
+            }
+
+            // Filter by productSex
+            if (!string.IsNullOrEmpty(sex) && Enum.TryParse<Sex>(sex, out var productSex))
+            {
+                products = products.Where(p => p.ProductSex == productSex).ToList();
+            }
+
+            //Filter by subcategory
+            if (!string.IsNullOrEmpty(subcategory))
+            {
+                var subcategories = subcategory.Split('/');
+                List<ClothingSubcategory> clothingSubcategories = new List<ClothingSubcategory>();
+
+                foreach (var cs in subcategories)
+                {
+                    if (Enum.TryParse<ClothingSubcategory>(cs, out var subcat))
+                    {
+                        clothingSubcategories.Add(subcat);
+                    }
+                }
+
+                products = products.Where(p => p.ProductSubcategory.HasValue && clothingSubcategories.Contains(p.ProductSubcategory.Value)).ToList();
+            }
 
             // Filter by productName
             if (!string.IsNullOrEmpty(searchTerm))
@@ -90,6 +120,15 @@ namespace Service.Implementation
                 products = products.Where(p => p.Condition == condition).ToList();
             }
 
+            //Filter by shoe number
+
+            if (!string.IsNullOrEmpty(shoeNumberRange))
+            {
+
+               int[] shoeNumberRangeArray = shoeNumberRange.Split(',').Select(int.Parse).ToArray();
+                products = products.Where(p => p.ProductSizeNumber >= shoeNumberRangeArray[0] && p.ProductSizeNumber <= shoeNumberRangeArray[1]).ToList();
+            }
+
             // Sort by price (ascending order)
             if (sortByPrice?.ToLower() == "desc")
             {
@@ -98,6 +137,16 @@ namespace Service.Implementation
             else if (sortByPrice?.ToLower() == "asc")
             {
                 products = products.OrderBy(p => p.ProductPrice).ToList();
+            }
+
+            //sort by user rating
+            if (sortByUserRating?.ToLower() == "desc")
+            {
+                products = products.OrderByDescending(p => p.ShopApplicationUser.UserRating).ToList();
+            }
+            else if (sortByUserRating?.ToLower() == "asc")
+            {
+                products = products.OrderBy(p => p.ShopApplicationUser.UserRating).ToList();
             }
 
             var productsDTO = products.Select(p => (ProductDTO)p).ToList();

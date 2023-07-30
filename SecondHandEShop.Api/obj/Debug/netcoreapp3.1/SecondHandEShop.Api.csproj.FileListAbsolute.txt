@@ -263,3 +263,9 @@ C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3
 C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\SecondHandEShop.Api.dll
 C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\SecondHandEShop.Api.pdb
 C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\SecondHandEShop.Api.genruntimeconfig.cache
+C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
+C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\EntityFramework.dll
+C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\System.CodeDom.dll
+C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

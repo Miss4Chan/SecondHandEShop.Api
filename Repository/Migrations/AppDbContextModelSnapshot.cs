@@ -114,6 +114,9 @@ namespace Repository.Migrations
                     b.Property<float>("ProductPrice")
                         .HasColumnType("real");
 
+                    b.Property<int>("ProductSex")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ProductSize")
                         .HasColumnType("int");
 

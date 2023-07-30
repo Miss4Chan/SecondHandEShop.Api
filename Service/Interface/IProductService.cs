@@ -7,7 +7,7 @@ namespace Service.Interface
 {
     public interface IProductService
     {
-        List<ProductDTO> GetProducts(string searchTerm, string colorFilter, string sizeFilter, string conditionFilter, string sortByPrice);
+        List<ProductDTO> GetProducts(string type, string sex, string subcategory, string searchTerm, string colorFilter, string sizeFilter, string conditionFilter, string sortByPrice, string sortByUserRating, string shoeNumberRange);
         List<ProductDTO> GetMyProducts();
         ProductDTO GetProduct(int id);
         ProductDTO EditProduct(ProductDTO productDTO);

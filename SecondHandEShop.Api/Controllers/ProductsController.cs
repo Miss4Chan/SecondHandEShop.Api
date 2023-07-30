@@ -25,6 +25,13 @@ namespace SecondHandEShop.Api.Controllers
             return Ok(conditionTypes);
         }
 
+        [HttpGet("productSex")]
+        public IActionResult GetSexTypes()
+        {
+            var sexTypes = Enum.GetValues(typeof(Sex)).Cast<Sex>().Select(x => x.ToString()).ToList();
+            return Ok(sexTypes);
+        }
+
         [HttpGet("productTypes")]
         public IActionResult GetProductTypes()
         {
@@ -47,10 +54,10 @@ namespace SecondHandEShop.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetProducts(string searchTerm = "", string colorFilter = "", string sizeFilter = "", string conditionFilter = "", string sortByPrice = "")
+        public IActionResult GetProducts(string type = "", string sex = "", string subcategory="", string searchTerm = "", string colorFilter = "", string sizeFilter = "", string conditionFilter = "", string sortByPrice = "", string sortByUserRating = "", string shoeNumberRange="")
         {
-
-            return Ok(_productService.GetProducts(searchTerm, colorFilter, sizeFilter, conditionFilter, sortByPrice));
+            
+            return Ok(_productService.GetProducts(type, sex, subcategory, searchTerm, colorFilter, sizeFilter, conditionFilter, sortByPrice, sortByUserRating, shoeNumberRange));
         }
 
         [HttpGet("myProducts")]

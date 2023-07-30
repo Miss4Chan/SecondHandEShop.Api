@@ -23,6 +23,8 @@ namespace Domain.DTO
         public bool ProductAvailablity { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
+        public string ProductSex { get; set; }
+        public double UserRating { get; set; }
 
         public static explicit operator ProductDTO(Product p) => new ProductDTO
         {
@@ -42,6 +44,8 @@ namespace Domain.DTO
             ProductBrand = p.ProductBrand,
             ProductCondition = p.Condition.ToString(),
             ProductMaterial = p.ProductMaterial,
-        };
+            ProductSex = p.ProductSex.ToString(),
+            UserRating = p.ShopApplicationUser.UserRating
+    };
     }
 }
