@@ -56,6 +56,10 @@ namespace Service.Implementation
             product.ProductMeasurements = productDTO.ProductMeasurements;
             product.ProductSize = Enum.TryParse(productDTO.ProductSize, out Size size) ? size : (Size?)null;
             product.ProductSubcategory = Enum.TryParse(productDTO.ProductSubcategory, out ClothingSubcategory clothing) ? clothing : (ClothingSubcategory?)null;
+            product.ProductImage = productDTO.ProductImage;
+            product.ProductMaterial = productDTO.ProductMaterial;
+            product.ProductBrand = productDTO.ProductBrand;
+            product.Condition = (Condition)Enum.Parse(typeof(Condition), productDTO.ProductCondition);
 
             _context.SaveChanges();
 

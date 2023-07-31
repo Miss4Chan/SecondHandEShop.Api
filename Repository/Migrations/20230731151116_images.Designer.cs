@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230727180647_initial")]
-    partial class initial
+    [Migration("20230731151116_images")]
+    partial class images
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -116,6 +116,9 @@ namespace Repository.Migrations
                     b.Property<float>("ProductPrice")
                         .HasColumnType("real");
 
+                    b.Property<int>("ProductSex")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ProductSize")
                         .HasColumnType("int");
 
@@ -136,6 +139,26 @@ namespace Repository.Migrations
                     b.HasIndex("ShopApplicationUserId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Domain.Domain_models.ProductImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("Domain.Domain_models.ProductInFavourites", b =>
@@ -278,6 +301,15 @@ namespace Repository.Migrations
                     b.HasOne("Domain.Identity.ShopApplicationUser", "ShopApplicationUser")
                         .WithMany()
                         .HasForeignKey("ShopApplicationUserId");
+                });
+
+            modelBuilder.Entity("Domain.Domain_models.ProductImage", b =>
+                {
+                    b.HasOne("Domain.Domain_models.Product", "Product")
+                        .WithMany("ProductImages")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Domain_models.ProductInFavourites", b =>

@@ -171,11 +171,6 @@ D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netco
 D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\SecondHandEShop.Api.dll
 D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\SecondHandEShop.Api.pdb
 D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\SecondHandEShop.Api.genruntimeconfig.cache
-D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\staticwebassets\SecondHandEShop.Api.StaticWebAssets.Pack.cache
-D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.SecondHandEShop.Api.Microsoft.AspNetCore.StaticWebAssets.props
-D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.build.SecondHandEShop.Api.props
-D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildMultiTargeting.SecondHandEShop.Api.props
-D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildTransitive.SecondHandEShop.Api.props
 C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\SecondHandEShop.Api.exe
@@ -269,3 +264,12 @@ C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3
 C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
 C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Marija\De\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
+D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\EntityFramework.dll
+D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\System.CodeDom.dll
+D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
+D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
+D:\Users\Despina\Desktop\SecondHandEShop.Api\SecondHandEShop.Api\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll

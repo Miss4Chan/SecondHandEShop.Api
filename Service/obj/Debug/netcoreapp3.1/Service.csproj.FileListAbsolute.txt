@@ -46,3 +46,6 @@ C:\Users\Marija\De\SecondHandEShop.Api\Service\obj\Debug\netcoreapp3.1\Service.p
 C:\Users\Marija\De\SecondHandEShop.Api\Service\bin\Debug\netcoreapp3.1\Service.runtimeconfig.json
 C:\Users\Marija\De\SecondHandEShop.Api\Service\bin\Debug\netcoreapp3.1\Service.runtimeconfig.dev.json
 C:\Users\Marija\De\SecondHandEShop.Api\Service\obj\Debug\netcoreapp3.1\Service.genruntimeconfig.cache
+D:\Users\Despina\Desktop\SecondHandEShop.Api\Service\bin\Debug\netcoreapp3.1\Service.runtimeconfig.json
+D:\Users\Despina\Desktop\SecondHandEShop.Api\Service\bin\Debug\netcoreapp3.1\Service.runtimeconfig.dev.json
+D:\Users\Despina\Desktop\SecondHandEShop.Api\Service\obj\Debug\netcoreapp3.1\Service.genruntimeconfig.cache

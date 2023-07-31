@@ -1,6 +1,7 @@
 ﻿using Domain.Domain_models;
 using Domain.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace Domain.DTO
 {
@@ -25,6 +26,7 @@ namespace Domain.DTO
         public string Email { get; set; }
         public string ProductSex { get; set; }
         public double UserRating { get; set; }
+        public string ProductImage { get; set; }
 
         public static explicit operator ProductDTO(Product p) => new ProductDTO
         {
@@ -45,7 +47,8 @@ namespace Domain.DTO
             ProductCondition = p.Condition.ToString(),
             ProductMaterial = p.ProductMaterial,
             ProductSex = p.ProductSex.ToString(),
-            UserRating = p.ShopApplicationUser.UserRating
+            UserRating = p.ShopApplicationUser.UserRating,
+            ProductImage = p.ProductImage
     };
     }
 }
