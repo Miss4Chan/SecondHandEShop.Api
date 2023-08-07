@@ -60,6 +60,8 @@ namespace Service.Implementation
             product.ProductMaterial = productDTO.ProductMaterial;
             product.ProductBrand = productDTO.ProductBrand;
             product.Condition = (Condition)Enum.Parse(typeof(Condition), productDTO.ProductCondition);
+            product.ProductSex = (Sex)Enum.Parse(typeof(Sex), productDTO.ProductSex);
+
 
             _context.SaveChanges();
 
