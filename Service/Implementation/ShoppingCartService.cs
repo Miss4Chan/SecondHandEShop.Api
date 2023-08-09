@@ -1,8 +1,10 @@
 ﻿using Domain.Domain_models;
 using Domain.DTO;
+using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Service.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -67,7 +69,7 @@ namespace Service.Implementation
             }
         }
 
-        public Order OrderNow(string email)
+        public Order OrderNow(string email, string deliveryType, string deliveryAddress, string deliveryPhone)
         {
             var loggedInUser = _context.ShopApplicationUsers.Where(u => u.Email == email)
             .Include(z => z.UserShoppingCart)
@@ -79,8 +81,11 @@ namespace Service.Implementation
             Order order = new Order
             {
                 User = loggedInUser,
-                UserId = loggedInUser.Id
-            };
+                UserId = loggedInUser.Id,
+                DeliveryType = (DeliveryType)Enum.Parse(typeof(DeliveryType), deliveryType),
+                DeliveryAddress = deliveryAddress,
+                DeliveryPhone = deliveryPhone
+        };
 
             this._context.Orders.Add(order);
 

@@ -10,6 +10,6 @@ namespace Service.Interface
     {
         ShoppingCartDTO getShoppingCartInfo(string email);
         bool deleteProductFromShoppingCart(string email, int productId);
-        Order OrderNow(string userId);
+        Order OrderNow(string userId, string deliveryType, string deliveryAddress, string deliveryPhone);
     }
 }

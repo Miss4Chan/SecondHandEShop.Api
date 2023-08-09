@@ -38,9 +38,9 @@ namespace SecondHandEShop.Api.Controllers
             }
 
         [HttpGet("Order")]
-        public IActionResult OrderNow(string email)
+        public IActionResult OrderNow(string email, string deliveryType, string deliveryAddress, string deliveryPhone)
         {
-            return Ok(_shoppingCartService.OrderNow(email));
+            return Ok(_shoppingCartService.OrderNow(email, deliveryType, deliveryAddress, deliveryPhone));
         }
     }
 }

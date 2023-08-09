@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.DTO
+namespace Domain.Enums
 {
-    class OrderDTO
+    public enum DeliveryType
     {
+        REGULAR,
+        FAST,
     }
 }

@@ -61,8 +61,6 @@ namespace Service.Implementation
 
             _context.Comments.Remove(comment);
             _context.SaveChanges();
-            _context.SaveChanges();
-            _context.SaveChanges();
 
             return true;
         }

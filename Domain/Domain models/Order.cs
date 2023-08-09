@@ -1,4 +1,5 @@
-﻿using Domain.Identity;
+﻿using Domain.Enums;
+using Domain.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,6 +12,9 @@ namespace Domain.Domain_models
         public int UserId { get; set; }
         [ForeignKey("UserId")]
         public ShopApplicationUser User { get; set; }
+        public DeliveryType DeliveryType { get; set; }
+        public string DeliveryAddress { get; set; }
+        public string DeliveryPhone { get; set; }
         public virtual ICollection<ProductInOrder> ProductsInOrder { get; set; }
     }
 }
