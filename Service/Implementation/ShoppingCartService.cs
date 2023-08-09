@@ -29,7 +29,7 @@ namespace Service.Implementation
 
             var userCart = loggedInUser.UserShoppingCart;
 
-            var productsList = userCart.ProductsInShoppingCart.ToList();
+            var productsList = userCart.ProductsInShoppingCart.Where(p => p.Product.ProductAvailablity == true).ToList();
 
             double totalPrice = 0.0;
 

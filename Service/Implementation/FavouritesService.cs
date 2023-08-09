@@ -48,7 +48,7 @@ namespace Service.Implementation
             .FirstOrDefault();
 
             var userFavourites = loggInUser.UserFavourites;
-            var productsList = userFavourites.ProductsInFavourites.ToList();
+            var productsList = userFavourites.ProductsInFavourites.Where(p => p.Product.ProductAvailablity == true).ToList();
 
             return productsList;
         }

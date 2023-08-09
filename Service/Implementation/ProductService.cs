@@ -31,6 +31,7 @@ namespace Service.Implementation
         public ProductDTO CreateProduct(Product product)
         {
             product.ShopApplicationUser = _user;
+            product.ProductAvailablity = true;
             _context.Add(product);
             _context.SaveChanges();
             return (ProductDTO) product;
@@ -70,7 +71,7 @@ namespace Service.Implementation
 
         public List<ProductDTO> GetProducts(string type, string sex, string subcategory, string searchTerm, string colorFilter, string sizeFilter, string conditionFilter, string sortByPrice, string sortByUserRating, string shoeNumberRange)
         {
-            var products = _context.Products.Include(p => p.ShopApplicationUser).ToList();
+            var products = _context.Products.Where(p => p.ProductAvailablity == true).Include(p => p.ShopApplicationUser).ToList();
 
             //Filter by type
             if (!string.IsNullOrEmpty(type) && Enum.TryParse<ProductType>(type, out var productType))
