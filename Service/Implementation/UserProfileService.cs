@@ -29,7 +29,9 @@ namespace Service.Implementation
                 Phone = _user.Phone,
                 Address = _user.Address,
                 Email = _user.Email,
-                Username = _user.Username
+                Username = _user.Username,
+                City = _user.City,
+                PostalCode = _user.PostalCode
             };
 
             return userDTO;

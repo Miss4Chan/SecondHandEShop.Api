@@ -13,6 +13,7 @@ namespace Domain.Domain_models
         public ShopApplicationUser Commenter { get; set; }
         [ForeignKey("ReceiverId")]
         public ShopApplicationUser Receiver { get; set; }
-        public DateTime CommentDate { get; set; }
+        public string FormattedDate { get; set; }
+        public string FormattedTime { get; set; }
     }
 }

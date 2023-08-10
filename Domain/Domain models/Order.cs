@@ -15,6 +15,12 @@ namespace Domain.Domain_models
         public DeliveryType DeliveryType { get; set; }
         public string DeliveryAddress { get; set; }
         public string DeliveryPhone { get; set; }
+        public string DeliveryCity { get; set; }
+        public string DeliveryPostalCode { get; set; }
+        public float Subtotal { get; set; }
+        public float Total { get; set; }
+        public string FormattedDate { get; set; }
+        public string FormattedTime { get; set; }
         public virtual ICollection<ProductInOrder> ProductsInOrder { get; set; }
     }
 }

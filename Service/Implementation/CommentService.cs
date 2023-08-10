@@ -40,7 +40,8 @@ namespace Service.Implementation
                 Content = comment.Content,
                 Commenter = commenter,
                 Receiver = receiver,
-                CommentDate = DateTime.UtcNow
+                FormattedDate = DateTime.Now.ToString("yyyy-MM-dd"),
+                FormattedTime = DateTime.Now.ToString("HH:mm:ss")
             };
 
             _context.Comments.Add(newComment);

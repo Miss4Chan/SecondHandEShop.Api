@@ -9,7 +9,8 @@ namespace Domain.DTO
     {
         public int Id { get; set; }
         public string Content { get; set; }
-        public DateTime CommentDate { get; set; }
+        public string FormattedDate { get; set; }
+        public string FormattedTime { get; set; }
         public string CommenterUsername { get; set; }
         public string ReceiverUsername { get; set; }
 
@@ -19,7 +20,8 @@ namespace Domain.DTO
             Content = c.Content,
             CommenterUsername = c.Commenter.Username,
             ReceiverUsername = c.Receiver.Username,
-            CommentDate = c.CommentDate
+            FormattedDate = c.FormattedDate,
+            FormattedTime = c.FormattedTime
         };
     }
 }

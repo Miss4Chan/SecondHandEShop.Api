@@ -69,7 +69,7 @@ namespace Service.Implementation
             }
         }
 
-        public Order OrderNow(string email, string deliveryType, string deliveryAddress, string deliveryPhone)
+        public Order OrderNow(string email, string deliveryType, string deliveryAddress, string deliveryPhone, string deliveryCity, string deliveryPostalCode)
         {
             var loggedInUser = _context.ShopApplicationUsers.Where(u => u.Email == email)
             .Include(z => z.UserShoppingCart)
@@ -84,14 +84,40 @@ namespace Service.Implementation
                 UserId = loggedInUser.Id,
                 DeliveryType = (DeliveryType)Enum.Parse(typeof(DeliveryType), deliveryType),
                 DeliveryAddress = deliveryAddress,
-                DeliveryPhone = deliveryPhone
-        };
+                DeliveryPhone = deliveryPhone,
+                DeliveryCity = deliveryCity,
+                DeliveryPostalCode = deliveryPostalCode,
+                FormattedDate = DateTime.Now.ToString("yyyy-MM-dd"),
+                FormattedTime = DateTime.Now.ToString("HH:mm:ss")
+            };
+
+            List<ProductInShoppingCart> productsInShoppingCart = userCard.ProductsInShoppingCart;
+
+            float totalPrice = 0;
+
+            foreach (ProductInShoppingCart p in productsInShoppingCart)
+            {
+                totalPrice += p.Product.ProductPrice;
+            }
+
+            order.Subtotal = totalPrice;
+
+            if (order.DeliveryType == DeliveryType.REGULAR)
+            {
+                totalPrice += 150;
+            }
+            else
+            {
+                totalPrice += 250;
+            }
+
+            order.Total = totalPrice;
 
             this._context.Orders.Add(order);
 
             List<ProductInOrder> productsInOrder = new List<ProductInOrder>();
 
-            var result = userCard.ProductsInShoppingCart.Select(z => new ProductInOrder
+            var result = productsInShoppingCart.Select(z => new ProductInOrder
             {
                 ProductId = z.ProductId,
                 Product = z.Product,
