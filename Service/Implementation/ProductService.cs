@@ -52,7 +52,6 @@ namespace Service.Implementation
             product.ProductType = (ProductType)Enum.Parse(typeof(ProductType), productDTO.ProductType);
             product.ProductSizeNumber = productDTO.ProductSizeNumber;
             product.ProductPrice = productDTO.ProductPrice;
-            product.ProductAvailablity = productDTO.ProductAvailablity;
             product.ProductColor = productDTO.ProductColor;
             product.ProductMeasurements = productDTO.ProductMeasurements;
             product.ProductSize = Enum.TryParse(productDTO.ProductSize, out Size size) ? size : (Size?)null;
@@ -129,7 +128,7 @@ namespace Service.Implementation
 
             //Filter by shoe number
 
-            if (!string.IsNullOrEmpty(shoeNumberRange))
+            if (!string.IsNullOrEmpty(type) && type.Equals("shoes") && !string.IsNullOrEmpty(shoeNumberRange))
             {
 
                int[] shoeNumberRangeArray = shoeNumberRange.Split(',').Select(int.Parse).ToArray();
