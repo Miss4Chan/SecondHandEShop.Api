@@ -3,6 +3,7 @@ using Domain.DTO;
 using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Repository;
+using Repository.Interface;
 using Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -14,18 +15,24 @@ namespace Service.Implementation
     public class ShoppingCartService : IShoppingCartService
     {
 
-        private AppDbContext _context;
-        public ShoppingCartService(AppDbContext context)
+        public readonly IRepository<ShoppingCart> _shoppingCartRepository;
+        public readonly IRepository<ProductInOrder> _productInOrderRepository;
+        public readonly IRepository<Order> _orderRepository;
+        public readonly IUserRepository _userRepository;
+        public readonly IRepository<Product> _productRepository;
+
+        public ShoppingCartService(IRepository<ShoppingCart> shoppingCartRepository, IRepository<ProductInOrder> productInOrderRepository, IRepository<Order> orderRepository, IUserRepository userRepository, IRepository<Product> productRepository)
         {
-            this._context = context;
+            this._shoppingCartRepository = shoppingCartRepository;
+            this._productInOrderRepository = productInOrderRepository;
+            this._orderRepository = orderRepository;
+            this._userRepository = userRepository;
+            this._productRepository = productRepository;
+
         }
         public ShoppingCartDTO getShoppingCartInfo(string email)
         {
-            var loggedInUser = _context.ShopApplicationUsers.Where(u => u.Email == email)
-                .Include(z => z.UserShoppingCart)
-              .Include("UserShoppingCart.ProductsInShoppingCart")
-              .Include("UserShoppingCart.ProductsInShoppingCart.Product")
-              .FirstOrDefault();
+            var loggedInUser = _userRepository.GetByEmail(email);
 
             var userCart = loggedInUser.UserShoppingCart;
 
@@ -51,16 +58,11 @@ namespace Service.Implementation
         {
             if (!string.IsNullOrEmpty(email) && productId != null)
             {
-                var loggInUser = _context.ShopApplicationUsers.Where(u => u.Email == email)
-                .Include(z => z.UserShoppingCart)
-                .Include("UserShoppingCart.ProductsInShoppingCart")
-                .Include("UserShoppingCart.ProductsInShoppingCart.Product")
-                .FirstOrDefault();
-                var userShoppingCart = loggInUser.UserShoppingCart;
+                var loggedInUser = _userRepository.GetByEmail(email);
+                var userShoppingCart = loggedInUser.UserShoppingCart;
                 var itemToDelete = userShoppingCart.ProductsInShoppingCart.Where(z => z.ProductId.Equals(productId)).FirstOrDefault();
                 userShoppingCart.ProductsInShoppingCart.Remove(itemToDelete);
-                _context.ShoppingCarts.Update(userShoppingCart);
-                _context.SaveChanges();
+                _shoppingCartRepository.Update(userShoppingCart);
                 return true;
             }
             else
@@ -71,11 +73,7 @@ namespace Service.Implementation
 
         public Order OrderNow(string email, string deliveryType, string deliveryAddress, string deliveryPhone, string deliveryCity, string deliveryPostalCode)
         {
-            var loggedInUser = _context.ShopApplicationUsers.Where(u => u.Email == email)
-            .Include(z => z.UserShoppingCart)
-            .Include("UserShoppingCart.ProductsInShoppingCart")
-            .Include("UserShoppingCart.ProductsInShoppingCart.Product")
-             .FirstOrDefault();
+            var loggedInUser = _userRepository.GetByEmail(email);
             var userCard = loggedInUser.UserShoppingCart;
 
             Order order = new Order
@@ -113,7 +111,7 @@ namespace Service.Implementation
 
             order.Total = totalPrice;
 
-            this._context.Orders.Add(order);
+            _orderRepository.Insert(order);
 
             List<ProductInOrder> productsInOrder = new List<ProductInOrder>();
 
@@ -129,16 +127,15 @@ namespace Service.Implementation
 
             foreach (var item in productsInOrder)
             {
-                this._context.ProductsInOrders.Add(item);
+                _productInOrderRepository.Insert(item);
                 var product = item.Product;
                 product.ProductAvailablity = false;
-                this._context.Products.Update(product);
+                _productRepository.Update(product);
             }
 
             loggedInUser.UserShoppingCart.ProductsInShoppingCart.Clear();
 
-            this._context.ShopApplicationUsers.Update(loggedInUser);
-            this._context.SaveChanges();
+            this._userRepository.Update(loggedInUser);
             return order;
 
         }

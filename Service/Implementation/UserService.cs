@@ -6,6 +6,7 @@ using Domain.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.EntityFrameworkCore;
 using Repository;
+using Repository.Interface;
 using Service.Interface;
 using System;
 using System.Threading.Tasks;
@@ -14,19 +15,18 @@ namespace Service.Implementation
 {
     public class UserService : IUserService
     {
-        private readonly AppDbContext _context;
+        public readonly IUserRepository _userRepository;
         private readonly IPasswordHasher _passwordHasher;
 
-        public UserService(AppDbContext context, IPasswordHasher passwordHasher)
+        public UserService(IUserRepository userRepository, IPasswordHasher passwordHasher)
         {
-            _context = context;
+            _userRepository = userRepository;
             _passwordHasher = passwordHasher;
         }
 
         public async Task<AuthenticatedUserDTO> SignIn(ShopApplicationUser user)
         {
-            var dbUser = await _context.ShopApplicationUsers
-                .FirstOrDefaultAsync(u => u.Email == user.Email);
+            var dbUser = _userRepository.GetByEmail(user.Email);
 
             if (dbUser == null || _passwordHasher.VerifyHashedPassword(dbUser.Password, user.Password) == PasswordVerificationResult.Failed)
             {
@@ -42,11 +42,9 @@ namespace Service.Implementation
 
         public async Task<AuthenticatedUserDTO> SignUp(ShopApplicationUser user)
         {
-            var checkEmail = await _context.ShopApplicationUsers
-                    .FirstOrDefaultAsync(u => u.Email.Equals(user.Email));
+            var checkEmail = _userRepository.GetByEmail(user.Email);
 
-            var checkUsername = await _context.ShopApplicationUsers
-            .FirstOrDefaultAsync(u => u.Username.Equals(user.Username));
+            var checkUsername = _userRepository.GetByUsername(user.Username);
 
             if (checkUsername != null && checkUsername != null)
             {
@@ -72,8 +70,7 @@ namespace Service.Implementation
             user.UserRating = 0;
             user.UserRatingTotal = 0;
 
-            await _context.AddAsync(user);
-            await _context.SaveChangesAsync();
+            _userRepository.Insert(user);
 
             return new AuthenticatedUserDTO
             {

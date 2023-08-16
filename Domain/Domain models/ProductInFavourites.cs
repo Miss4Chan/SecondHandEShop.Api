@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Domain.Domain_models
 {
-    public class ProductInFavourites
+    public class ProductInFavourites : BaseEntity
     {
         public int ProductId { get; set; }
         public int FavouritesId { get; set; }

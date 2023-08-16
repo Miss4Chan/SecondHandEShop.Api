@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Repository;
+using Repository.Interface;
 using Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,19 @@ namespace Service.Implementation
 {
     public class ProductService : IProductService
     {
-        private AppDbContext _context;
+        public readonly IProductRepository _productRepository;
+        public readonly IUserRepository _userRepository;
+        public readonly IRepository<ProductInShoppingCart> _productInShoppingCartRepository;
+        public readonly IRepository<ProductInFavourites> _productInFavouritesRepository;
         private readonly ShopApplicationUser _user;
-        public ProductService (AppDbContext context, IHttpContextAccessor httpContextAccessor)
+        public ProductService (IHttpContextAccessor httpContextAccessor, IUserRepository userRepository, IProductRepository productRepository, IRepository<ProductInShoppingCart> productInShoppingCartRepository, IRepository<ProductInFavourites> productInFavouritesRepository)
         {
-            this._context = context;
-            var _users = _context.ShopApplicationUsers.ToArray();
-            var name = httpContextAccessor.HttpContext.User.Identity.Name;
-            _user = _context.ShopApplicationUsers.First(u => u.Email == httpContextAccessor.HttpContext.User.Identity.Name);
+            this._userRepository = userRepository;
+            this._productRepository = productRepository;
+            this._productInShoppingCartRepository = productInShoppingCartRepository;
+            this._productInFavouritesRepository = productInFavouritesRepository;
+
+            this._user = _userRepository.GetByEmail(httpContextAccessor.HttpContext.User.Identity.Name);
             //httpContextAccessor.HttpContext.User.Identity.Name --> The name we have inside the JWT Token
         }
 
@@ -32,21 +38,19 @@ namespace Service.Implementation
         {
             product.ShopApplicationUser = _user;
             product.ProductAvailablity = true;
-            _context.Add(product);
-            _context.SaveChanges();
+            _productRepository.Insert(product);
             return (ProductDTO) product;
         }
 
         public void DeleteProduct(ProductDTO productDTO)
         {
-            var product = _context.Products.First(p => p.ShopApplicationUser.Id == _user.Id && p.Id == productDTO.Id);
-            _context.Products.Remove(product);
-            _context.SaveChanges();
+            var product = _productRepository.GetById(productDTO.Id);
+            _productRepository.Delete(product);
         }
 
         public ProductDTO EditProduct(ProductDTO productDTO)
         {
-            var product = _context.Products.First(p => p.ShopApplicationUser.Id == _user.Id && p.Id == productDTO.Id);
+            var product = _productRepository.GetById(productDTO.Id);
             product.ProductDescription = productDTO.ProductDescription;
             product.ProductName = productDTO.ProductName;
             product.ProductType = (ProductType)Enum.Parse(typeof(ProductType), productDTO.ProductType);
@@ -63,14 +67,14 @@ namespace Service.Implementation
             product.ProductSex = (Sex)Enum.Parse(typeof(Sex), productDTO.ProductSex);
 
 
-            _context.SaveChanges();
+            _productRepository.Update(product);
 
             return productDTO;
         }
 
         public List<ProductDTO> GetProducts(string type, string sex, string subcategory, string searchTerm, string colorFilter, string sizeFilter, string conditionFilter, string sortByPrice, string sortByUserRating, string shoeNumberRange)
         {
-            var products = _context.Products.Where(p => p.ProductAvailablity == true).Include(p => p.ShopApplicationUser).ToList();
+            var products = _productRepository.GetAllAvaliableProducts();
 
             //Filter by type
             if (!string.IsNullOrEmpty(type) && Enum.TryParse<ProductType>(type, out var productType))
@@ -155,33 +159,25 @@ namespace Service.Implementation
                 products = products.OrderBy(p => p.ShopApplicationUser.UserRating).ToList();
             }
 
-            var productsDTO = products.Select(p => (ProductDTO)p).ToList();
+            List<ProductDTO> productsDTO = products.Select(p => (ProductDTO)p).ToList();
+
             return productsDTO;
         }
 
         public List<ProductDTO> GetMyProducts()
         {
-            return _context.Products
-                .Where(p => p.ShopApplicationUser.Id == _user.Id)
-                .Select(p => (ProductDTO)p)
-                .ToList();
+            return _productRepository.GetProductsByEmail(_user.Email);
         }
 
         public ProductDTO GetProduct(int id)
         {
-            return _context.Products
-                .Where(p => p.ShopApplicationUser.Id == _user.Id && p.Id == id)
-                .Select(p => (ProductDTO)p)
-                .First();
+            return (ProductDTO)_productRepository.GetById(id);
                
         }
 
         public bool AddToShoppingCart(Product product, string email)
         {
-            var user = _context.ShopApplicationUsers
-                .Include(u => u.UserShoppingCart) // Eagerly load the UserShoppingCart navigation property
-                .ThenInclude(u => u.ProductsInShoppingCart)
-                .FirstOrDefault(user => user.Email == email);
+            var user = _userRepository.GetByEmail(email);
 
             var userShoppingCart = user.UserShoppingCart;
 
@@ -191,7 +187,6 @@ namespace Service.Implementation
 
                 if (isAlreadyAdded == null)
                 {
-                    _context.Attach(product);
                     var productInShoppingCart = new ProductInShoppingCart
                     {
                         ShoppingCart = userShoppingCart,
@@ -200,8 +195,7 @@ namespace Service.Implementation
                         ProductId = product.Id
                     };
 
-                    _context.ProductsInShoppingCarts.Add(productInShoppingCart);
-                    _context.SaveChanges();
+                    _productInShoppingCartRepository.Insert(productInShoppingCart);
                 }
                 return true;
             }
@@ -211,10 +205,7 @@ namespace Service.Implementation
 
         public bool AddToFavourites(Product product, string email)
         {
-            var user = _context.ShopApplicationUsers
-                .Include(u => u.UserFavourites) 
-                .ThenInclude(u => u.ProductsInFavourites)
-                .FirstOrDefault(user => user.Email == email);
+            var user = _userRepository.GetByEmail(email);
 
             var userFavourites = user.UserFavourites;
 
@@ -224,7 +215,6 @@ namespace Service.Implementation
 
                 if (isAlreadyAdded == null)
                 {
-                    _context.Attach(product);
                     var productInFavourites = new ProductInFavourites
                     {
                         Favourites = userFavourites,
@@ -233,8 +223,7 @@ namespace Service.Implementation
                         ProductId = product.Id
                     };
 
-                    _context.ProductsInFavourites.Add(productInFavourites);
-                    _context.SaveChanges();
+                    _productInFavouritesRepository.Insert(productInFavourites);
                 }
                 return true;
             }

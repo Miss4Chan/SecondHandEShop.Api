@@ -2,6 +2,7 @@
 using Domain.DTO;
 using Microsoft.EntityFrameworkCore;
 using Repository;
+using Repository.Interface;
 using Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -11,19 +12,21 @@ namespace Service.Implementation
 {
     public class CommentService : ICommentService
     {
-        private readonly AppDbContext _context;
+        public readonly IUserRepository _userRepository;
+        public readonly ICommentRepository _commentRepository;
 
-        public CommentService(AppDbContext context)
+        public CommentService(IUserRepository userRepository, ICommentRepository commentRepository)
         {
-            _context = context;
+            this._userRepository = userRepository;
+            this._commentRepository = commentRepository;
         }
 
         public CommentDTO AddComment( CommentDTO comment, int rating)
         {
-            var commenter = _context.ShopApplicationUsers.FirstOrDefault(u => u.Email == comment.CommenterUsername);
-            var receiver = _context.ShopApplicationUsers.FirstOrDefault(u => u.Email == comment.ReceiverUsername);
-            
-            if(rating !=null)
+            var commenter = _userRepository.GetByUsername(comment.CommenterUsername);
+            var receiver = _userRepository.GetByUsername(comment.ReceiverUsername);
+
+            if (rating !=null)
             {
                 receiver.UserRatingCount += 1;
                 receiver.UserRatingTotal += rating;
@@ -44,8 +47,7 @@ namespace Service.Implementation
                 FormattedTime = DateTime.Now.ToString("HH:mm:ss")
             };
 
-            _context.Comments.Add(newComment);
-            _context.SaveChanges();
+            _commentRepository.Insert(newComment);
 
             return (CommentDTO)newComment;
         }
@@ -53,32 +55,19 @@ namespace Service.Implementation
 
         public bool DeleteComment(int commentId)
         {
-            var comment = _context.Comments.FirstOrDefault(c => c.Id == commentId);
-
-            if (comment == null)
-            {
-                return false;
-            }
-
-            _context.Comments.Remove(comment);
-            _context.SaveChanges();
+            _commentRepository.Delete(commentId);
 
             return true;
         }
         public List<CommentDTO> GetCommentsByReceiverUsername(string receiverUsername)
         {
-            var receiver = _context.ShopApplicationUsers.FirstOrDefault(u => u.Username == receiverUsername);
-
+            var receiver = _userRepository.GetByUsername(receiverUsername);
             if (receiver == null)
             {
                 throw new ArgumentException("Receiver not found.");
             }
 
-            return _context.Comments
-                .Include(c => c.Commenter) 
-                .Where(c => c.Receiver.Id == receiver.Id)
-                .Select(c => (CommentDTO)c)
-                .ToList();
+            return _commentRepository.GetByReceiver(receiver.Id);
         }
     }
 }

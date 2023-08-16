@@ -1,6 +1,7 @@
 ﻿using Domain.Domain_models;
 using Microsoft.EntityFrameworkCore;
 using Repository;
+using Repository.Interface;
 using Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -12,25 +13,26 @@ namespace Service.Implementation
     public class FavouritesService : IFavouritesService
     {
 
-        private AppDbContext _context;
-        public FavouritesService(AppDbContext context)
+        public readonly IRepository<Favourites> _favouritesRepository;
+        public readonly IUserRepository _userRepository;
+
+        public FavouritesService(
+        IRepository<Favourites> favouritesRepository,
+        IUserRepository userRepository,
+        IRepository<ProductInFavourites> productInFavouritesRepository)
         {
-            this._context = context;
+            this._favouritesRepository = favouritesRepository;
+            this._userRepository = userRepository;
         }
         public bool deleteProductFromFavourites(string email, int productId)
         {
             if (!string.IsNullOrEmpty(email) && productId != null)
             {
-                var loggInUser = _context.ShopApplicationUsers.Where(u => u.Email == email)
-                .Include(z => z.UserFavourites)
-                .Include("UserFavourites.ProductsInFavourites")
-                .Include("UserFavourites.ProductsInFavourites.Product")
-                .FirstOrDefault();
+                var loggInUser = _userRepository.GetByEmail(email);
                 var userFavourites = loggInUser.UserFavourites;
                 var itemToDelete = userFavourites.ProductsInFavourites.Where(z => z.ProductId.Equals(productId)).FirstOrDefault();
                 userFavourites.ProductsInFavourites.Remove(itemToDelete);
-                _context.Favourites.Update(userFavourites);
-                _context.SaveChanges();
+                _favouritesRepository.Update(userFavourites);
                 return true;
             }
             else
@@ -41,11 +43,7 @@ namespace Service.Implementation
 
         public List<ProductInFavourites> getFavouritesInfo(string email)
         {
-            var loggInUser = _context.ShopApplicationUsers.Where(u => u.Email == email)
-            .Include(z => z.UserFavourites)
-            .Include("UserFavourites.ProductsInFavourites")
-            .Include("UserFavourites.ProductsInFavourites.Product")
-            .FirstOrDefault();
+            var loggInUser = _userRepository.GetByEmail(email);
 
             var userFavourites = loggInUser.UserFavourites;
             var productsList = userFavourites.ProductsInFavourites.Where(p => p.Product.ProductAvailablity == true).ToList();

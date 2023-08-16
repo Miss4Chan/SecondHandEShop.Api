@@ -1,6 +1,7 @@
 ﻿using Domain.Domain_models;
 using Microsoft.EntityFrameworkCore;
 using Repository;
+using Repository.Interface;
 using Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -11,35 +12,24 @@ namespace Service.Implementation
 {
     public class OrderService : IOrderService
     {
-        private AppDbContext _context;
-        public OrderService(AppDbContext context)
+        public readonly IOrderRepository _orderRepository;
+        public OrderService(IOrderRepository orderRepository)
         {
-            this._context = context;
+            this._orderRepository = orderRepository;
         }
 
         public Order GetOrderDetails(int orderId)
         {
-            return this._context.Orders.Include(z => z.User)
-                     .Include(z => z.ProductsInOrder)
-                     .Include("ProductsInOrder.Product").SingleOrDefault(z => z.Id == orderId);
+            return _orderRepository.GetOrderDetails(orderId);
         }
 
         public List<Order> GetAllOrders()
         {
-            return this._context.Orders.Include(z => z.User)
-                .Include(z => z.ProductsInOrder)
-                .Include("ProductsInOrder.Product").ToList();
+            return this._orderRepository.GetAllOrders();
         }
         public List<Order> GetMyOrders(string email)
         {
-            var email2 = email;
-            var users = this._context.Orders.Include(z => z.User).Where(u => u.User.Email == email)
-                .Include(z => z.ProductsInOrder)
-                .Include("ProductsInOrder.Product")
-                .Include("ProductsInOrder.Product.ShopApplicationUser")
-                .ToList();
-
-            return users;
+            return this._orderRepository.GetMyOrders(email);
         }
     }
 }

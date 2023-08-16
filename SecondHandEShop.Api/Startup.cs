@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Repository;
+using Repository.Implementation;
+using Repository.Interface;
 using Service.Implementation;
 using Service.Interface;
 using System;
@@ -42,6 +44,14 @@ namespace SecondHandEShop.Api
 
             services.AddControllers();
             services.AddDbContext<AppDbContext>();
+
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+            services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
+            services.AddScoped(typeof(ICommentRepository), typeof(CommentRepository));
+            services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
+
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IUserProfileService, UserProfileService>();
             services.AddTransient<IShoppingCartService, ShoppingCartService>();

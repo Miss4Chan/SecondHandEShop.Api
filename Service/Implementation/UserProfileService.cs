@@ -1,7 +1,9 @@
-﻿using Domain.DTO;
+﻿using Domain.Domain_models;
+using Domain.DTO;
 using Domain.Identity;
 using Microsoft.AspNetCore.Http;
 using Repository;
+using Repository.Interface;
 using Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -12,13 +14,19 @@ namespace Service.Implementation
 {
     public class UserProfileService : IUserProfileService
     {
-        private AppDbContext _context;
-        private readonly ShopApplicationUser _user;
-        public UserProfileService(AppDbContext context, IHttpContextAccessor httpContextAccessor)
+        public readonly IUserRepository _userRepository;
+        public readonly ICommentRepository _commentRepository;
+        public readonly IProductRepository _productRepository;
+        public readonly ShopApplicationUser _user;
+
+        public UserProfileService (IHttpContextAccessor httpContextAccessor, IUserRepository userRepository, ICommentRepository commentRepository, IProductRepository productRepository, AppDbContext _context)
         {
-            this._context = context;
-            _user = _context.ShopApplicationUsers.First(u => u.Email == httpContextAccessor.HttpContext.User.Identity.Name);
-        }
+            this._userRepository = userRepository;
+            this._commentRepository = commentRepository;
+            this._productRepository = productRepository;
+            this._user = _userRepository.GetByEmail(httpContextAccessor.HttpContext.User.Identity.Name);
+
+      }
         public UserDTO GetMyProfile()
         {
 
@@ -38,9 +46,9 @@ namespace Service.Implementation
         }
         public UserDTO GetProfile(string username)
         {
-            var user = _context.ShopApplicationUsers.FirstOrDefault(u => u.Username == username);
-            var productList = _context.Products.Where(p => p.ShopApplicationUser.Id == user.Id).Select(p => (ProductDTO)p).ToList(); 
-            var comments = _context.Comments.Where(c => c.Receiver.Username == username).Select(c => (CommentDTO)c).ToList();
+            var user = this._userRepository.GetByUsername(username);
+            var productList = _productRepository.GetProductsByEmail(user.Email);
+            var comments = this._commentRepository.GetByReceiver(user.Id);
 
 
             if (user != null)

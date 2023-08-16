@@ -6,9 +6,9 @@ namespace Domain.Enums
 {
     public enum Condition
     {
-        Never,
-        Once,
-        MultipleTimes,
+        NeverWorn,
+        WornOnce ,
+        WornMultipleTimes,
         Worn
     }
 }
