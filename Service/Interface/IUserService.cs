@@ -11,5 +11,6 @@ namespace Service.Interface
     {
         Task<AuthenticatedUserDTO> SignUp(ShopApplicationUser user);
         Task<AuthenticatedUserDTO> SignIn(ShopApplicationUser user);
+        UserDTO GetProfile(string username);
     }
 }

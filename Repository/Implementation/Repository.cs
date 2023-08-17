@@ -42,7 +42,7 @@ namespace Repository.Implementation
             if (entity == null)
                 throw new ArgumentNullException("entity");
 
-            entities.Add(entity);
+            context.Set<T>().Add(entity);
             context.SaveChanges();
 
         }

@@ -23,13 +23,13 @@ namespace Service.Implementation
         public readonly IRepository<ProductInShoppingCart> _productInShoppingCartRepository;
         public readonly IRepository<ProductInFavourites> _productInFavouritesRepository;
         private readonly ShopApplicationUser _user;
+    
         public ProductService (IHttpContextAccessor httpContextAccessor, IUserRepository userRepository, IProductRepository productRepository, IRepository<ProductInShoppingCart> productInShoppingCartRepository, IRepository<ProductInFavourites> productInFavouritesRepository)
         {
             this._userRepository = userRepository;
             this._productRepository = productRepository;
             this._productInShoppingCartRepository = productInShoppingCartRepository;
             this._productInFavouritesRepository = productInFavouritesRepository;
-
             this._user = _userRepository.GetByEmail(httpContextAccessor.HttpContext.User.Identity.Name);
             //httpContextAccessor.HttpContext.User.Identity.Name --> The name we have inside the JWT Token
         }
@@ -187,12 +187,13 @@ namespace Service.Implementation
 
                 if (isAlreadyAdded == null)
                 {
+                    var p = _productRepository.GetById(product.Id);
                     var productInShoppingCart = new ProductInShoppingCart
                     {
                         ShoppingCart = userShoppingCart,
-                        Product = product,
+                        Product = p,
                         ShoppingCartId = userShoppingCart.Id,
-                        ProductId = product.Id
+                        ProductId = p.Id
                     };
 
                     _productInShoppingCartRepository.Insert(productInShoppingCart);
@@ -215,12 +216,13 @@ namespace Service.Implementation
 
                 if (isAlreadyAdded == null)
                 {
+                    var p = _productRepository.GetById(product.Id);
                     var productInFavourites = new ProductInFavourites
                     {
                         Favourites = userFavourites,
-                        Product = product,
+                        Product = p,
                         FavouritesId = userFavourites.Id,
-                        ProductId = product.Id
+                        ProductId = p.Id
                     };
 
                     _productInFavouritesRepository.Insert(productInFavourites);

@@ -8,22 +8,23 @@ using System.Threading.Tasks;
 
 namespace SecondHandEShop.Api.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private IUserProfileService _userService;
+        private IUserProfileService _userProfileService;
+        private IUserService _userService;
 
-        public UserController(IUserProfileService userService)
+        public UserController(IUserProfileService userProfileService, IUserService userService)
         {
+            this._userProfileService = userProfileService;
             this._userService = userService;
         }
 
         [HttpGet]
         public IActionResult GetMyProfile()
         {
-            return Ok(_userService.GetMyProfile());
+            return Ok(_userProfileService.GetMyProfile());
         }
 
         [HttpGet("{username}")]

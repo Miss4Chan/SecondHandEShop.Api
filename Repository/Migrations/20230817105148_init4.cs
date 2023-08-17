@@ -2,13 +2,13 @@
 
 namespace Repository.Migrations
 {
-    public partial class order : Migration
+    public partial class init4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "Delivery",
-                table: "Orders",
+                name: "Id",
+                table: "ProductsInShoppingCarts",
                 nullable: false,
                 defaultValue: 0);
         }
@@ -16,8 +16,8 @@ namespace Repository.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Delivery",
-                table: "Orders");
+                name: "Id",
+                table: "ProductsInShoppingCarts");
         }
     }
 }

@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230810144930_cityandpostalcode")]
-    partial class cityandpostalcode
+    [Migration("20230817103645_init3")]
+    partial class init3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,13 +28,16 @@ namespace Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CommentDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("CommenterId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FormattedDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FormattedTime")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ReceiverId")
@@ -85,6 +88,18 @@ namespace Repository.Migrations
 
                     b.Property<int>("DeliveryType")
                         .HasColumnType("int");
+
+                    b.Property<string>("FormattedDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FormattedTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Subtotal")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Total")
+                        .HasColumnType("real");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -165,6 +180,9 @@ namespace Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("FavouritesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.HasKey("ProductId", "FavouritesId");

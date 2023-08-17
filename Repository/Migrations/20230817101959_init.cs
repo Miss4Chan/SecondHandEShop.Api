@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Repository.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +45,8 @@ namespace Repository.Migrations
                     Password = table.Column<string>(nullable: true),
                     Phone = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    PostalCode = table.Column<string>(nullable: true),
                     UserShoppingCartId = table.Column<int>(nullable: true),
                     UserFavouritesId = table.Column<int>(nullable: true),
                     UserRatingCount = table.Column<int>(nullable: false),
@@ -78,7 +79,8 @@ namespace Repository.Migrations
                     Content = table.Column<string>(nullable: true),
                     CommenterId = table.Column<int>(nullable: true),
                     ReceiverId = table.Column<int>(nullable: true),
-                    CommentDate = table.Column<DateTime>(nullable: false)
+                    FormattedDate = table.Column<string>(nullable: true),
+                    FormattedTime = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -103,7 +105,16 @@ namespace Repository.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: false),
+                    DeliveryType = table.Column<int>(nullable: false),
+                    DeliveryAddress = table.Column<string>(nullable: true),
+                    DeliveryPhone = table.Column<string>(nullable: true),
+                    DeliveryCity = table.Column<string>(nullable: true),
+                    DeliveryPostalCode = table.Column<string>(nullable: true),
+                    Subtotal = table.Column<float>(nullable: false),
+                    Total = table.Column<float>(nullable: false),
+                    FormattedDate = table.Column<string>(nullable: true),
+                    FormattedTime = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -155,7 +166,8 @@ namespace Repository.Migrations
                 columns: table => new
                 {
                     ProductId = table.Column<int>(nullable: false),
-                    FavouritesId = table.Column<int>(nullable: false)
+                    FavouritesId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -204,7 +216,8 @@ namespace Repository.Migrations
                 columns: table => new
                 {
                     ProductId = table.Column<int>(nullable: false),
-                    ShoppingCartId = table.Column<int>(nullable: false)
+                    ShoppingCartId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

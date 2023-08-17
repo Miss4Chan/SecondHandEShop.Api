@@ -19,11 +19,9 @@ namespace Service.Implementation
         public readonly IProductRepository _productRepository;
         public readonly ShopApplicationUser _user;
 
-        public UserProfileService (IHttpContextAccessor httpContextAccessor, IUserRepository userRepository, ICommentRepository commentRepository, IProductRepository productRepository, AppDbContext _context)
+        public UserProfileService (IHttpContextAccessor httpContextAccessor, IUserRepository userRepository)
         {
             this._userRepository = userRepository;
-            this._commentRepository = commentRepository;
-            this._productRepository = productRepository;
             this._user = _userRepository.GetByEmail(httpContextAccessor.HttpContext.User.Identity.Name);
 
       }
@@ -43,35 +41,6 @@ namespace Service.Implementation
             };
 
             return userDTO;
-        }
-        public UserDTO GetProfile(string username)
-        {
-            var user = this._userRepository.GetByUsername(username);
-            var productList = _productRepository.GetProductsByEmail(user.Email);
-            var comments = this._commentRepository.GetByReceiver(user.Id);
-
-
-            if (user != null)
-            {
-                UserDTO userDTO = new UserDTO
-                {
-                    Name = user.Name,
-                    Surname = user.Surname,
-                    Phone = user.Phone,
-                    Address = user.Address,
-                    Email = user.Email,
-                    Username = user.Username,
-                    Products = productList,
-                    Rating = user.UserRating,
-                    RatingCount = user.UserRatingCount,
-                    Comments = comments
-                };
-
-                return userDTO;
-            }
-
-            return null;
-
         }
     }
 }

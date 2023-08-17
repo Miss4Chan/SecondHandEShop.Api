@@ -8,6 +8,5 @@ namespace Service.Interface
     public interface IUserProfileService
     {
         UserDTO GetMyProfile();
-        UserDTO GetProfile(string username);
     }
 }

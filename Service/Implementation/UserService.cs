@@ -17,11 +17,15 @@ namespace Service.Implementation
     {
         public readonly IUserRepository _userRepository;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly ICommentRepository _commentRepository;
+        private readonly IProductRepository _productRepository;
 
-        public UserService(IUserRepository userRepository, IPasswordHasher passwordHasher)
+        public UserService(IUserRepository userRepository, IPasswordHasher passwordHasher, ICommentRepository commentRepository, IProductRepository productRepository)
         {
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
+            _productRepository = productRepository;
+            _commentRepository = commentRepository;
         }
 
         public async Task<AuthenticatedUserDTO> SignIn(ShopApplicationUser user)
@@ -79,5 +83,35 @@ namespace Service.Implementation
         };
         }
 
+        public UserDTO GetProfile(string username)
+        {
+            var user = this._userRepository.GetByUsername(username);
+
+            if (user != null)
+            {
+                var productList = _productRepository.GetProductsByEmail(user.Email);
+                var comments = this._commentRepository.GetByReceiver(user.Id);
+
+                UserDTO userDTO = new UserDTO
+                {
+                    Name = user.Name,
+                    Surname = user.Surname,
+                    Phone = user.Phone,
+                    Address = user.Address,
+                    Email = user.Email,
+                    Username = user.Username,
+                    Products = productList,
+                    Rating = user.UserRating,
+                    RatingCount = user.UserRatingCount,
+                    Comments = comments
+                };
+
+                return userDTO;
+            }
+
+            return null;
+
         }
+
+    }
     }
