@@ -784,19 +784,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Marija\\.nuget\\packages\\": {}
+    "C:\\Users\\Depka\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Domain\\Domain.csproj",
+      "projectUniqueName": "C:\\Users\\Depka\\Source\\Repos\\SecondHandEShop.Api\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Domain\\Domain.csproj",
-      "packagesPath": "C:\\Users\\Marija\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Domain\\obj\\",
+      "projectPath": "C:\\Users\\Depka\\Source\\Repos\\SecondHandEShop.Api\\Domain\\Domain.csproj",
+      "packagesPath": "C:\\Users\\Depka\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Depka\\Source\\Repos\\SecondHandEShop.Api\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Marija\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Depka\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -846,7 +846,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

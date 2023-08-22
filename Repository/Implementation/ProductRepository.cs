@@ -44,7 +44,7 @@ namespace Repository.Implementation
 
         public Product GetById(int id)
         {
-            return entities.Where(e => e.Id == id).FirstOrDefault();
+            return entities.Where(e => e.Id == id).Include(p=>p.ShopApplicationUser).FirstOrDefault();
         }
 
         public List<ProductDTO> GetProductsByEmail(string email)
