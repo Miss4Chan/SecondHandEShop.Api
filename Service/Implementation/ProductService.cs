@@ -166,7 +166,7 @@ namespace Service.Implementation
 
         public List<ProductDTO> GetMyProducts()
         {
-            return _productRepository.GetProductsByEmail(_user.Email);
+            return _productRepository.GetMyProducts(_user.Email);
         }
 
         public ProductDTO GetProduct(int id)

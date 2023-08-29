@@ -15,5 +15,6 @@ namespace Repository.Interface
         Product GetById(int id);
         IEnumerable<Product> GetAllAvaliableProducts();
         List<ProductDTO> GetProductsByEmail(string email);
+        List<ProductDTO> GetMyProducts(string email);
     }
 }

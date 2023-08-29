@@ -16,17 +16,18 @@ namespace Service.Implementation
     {
         public readonly IUserRepository _userRepository;
         public readonly ICommentRepository _commentRepository;
-        public readonly IProductRepository _productRepository;
         public readonly ShopApplicationUser _user;
 
-        public UserProfileService (IHttpContextAccessor httpContextAccessor, IUserRepository userRepository)
+        public UserProfileService (IHttpContextAccessor httpContextAccessor, IUserRepository userRepository, ICommentRepository commentRepository)
         {
             this._userRepository = userRepository;
             this._user = _userRepository.GetByEmail(httpContextAccessor.HttpContext.User.Identity.Name);
+            this._commentRepository = commentRepository;
 
       }
         public UserDTO GetMyProfile()
         {
+            var comments = this._commentRepository.GetByReceiver(_user.Id);
 
             UserDTO userDTO = new UserDTO
             {
@@ -37,7 +38,10 @@ namespace Service.Implementation
                 Email = _user.Email,
                 Username = _user.Username,
                 City = _user.City,
-                PostalCode = _user.PostalCode
+                PostalCode = _user.PostalCode,
+                Rating = _user.UserRating,
+                RatingCount = _user.UserRatingCount,
+                Comments = comments
             };
 
             return userDTO;

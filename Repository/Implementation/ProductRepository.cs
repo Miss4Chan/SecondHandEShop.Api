@@ -44,15 +44,24 @@ namespace Repository.Implementation
 
         public Product GetById(int id)
         {
-            return entities.Where(e => e.Id == id).Include(p=>p.ShopApplicationUser).FirstOrDefault();
+            return entities.Where(e => e.Id == id).Where(p => p.ProductAvailablity == true).Include(p=>p.ShopApplicationUser).FirstOrDefault();
         }
 
         public List<ProductDTO> GetProductsByEmail(string email)
         {
             return entities
                 .Where(p => p.ShopApplicationUser.Email == email)
+                .Where(p => p.ProductAvailablity == true)
                 .Select(p => (ProductDTO)p)
                 .ToList();
+        }
+
+        public List<ProductDTO> GetMyProducts(string email)
+        {
+            return entities
+                .Where(p => p.ShopApplicationUser.Email == email)
+                 .Select(p => (ProductDTO)p)
+                 .ToList();
         }
 
         public void Insert(Product entity)

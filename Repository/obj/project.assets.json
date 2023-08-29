@@ -5935,19 +5935,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Depka\\.nuget\\packages\\": {}
+    "C:\\Users\\Marija\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Depka\\Source\\Repos\\SecondHandEShop.Api\\Repository\\Repository.csproj",
+      "projectUniqueName": "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Repository\\Repository.csproj",
       "projectName": "Repository",
-      "projectPath": "C:\\Users\\Depka\\Source\\Repos\\SecondHandEShop.Api\\Repository\\Repository.csproj",
-      "packagesPath": "C:\\Users\\Depka\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Depka\\Source\\Repos\\SecondHandEShop.Api\\Repository\\obj\\",
+      "projectPath": "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Repository\\Repository.csproj",
+      "packagesPath": "C:\\Users\\Marija\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Repository\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Depka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Marija\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5961,8 +5961,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Depka\\Source\\Repos\\SecondHandEShop.Api\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\Depka\\Source\\Repos\\SecondHandEShop.Api\\Domain\\Domain.csproj"
+            "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Domain\\Domain.csproj"
             }
           }
         }
@@ -6007,7 +6007,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
       }
     }
   }

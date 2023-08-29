@@ -60,6 +60,7 @@ namespace Repository.Implementation
         {
             return entities.Where(c => c.Receiver.Id == receiverId)
                       .Include(c => c.Commenter)
+                      .OrderByDescending(c => c.FormattedDate).ThenByDescending(c => c.FormattedTime)
                       .Select(c => (CommentDTO)c)
                       .ToList();
         }
