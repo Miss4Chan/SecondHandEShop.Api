@@ -1,32 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Repository\\Repository.csproj": {}
+    "D:\\Users\\Despina\\Desktop\\SecondHandEShop.Api\\Repository\\Repository.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Domain\\Domain.csproj": {
+    "D:\\Users\\Despina\\Desktop\\SecondHandEShop.Api\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Domain\\Domain.csproj",
+        "projectUniqueName": "D:\\Users\\Despina\\Desktop\\SecondHandEShop.Api\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\Marija\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Domain\\obj\\",
+        "projectPath": "D:\\Users\\Despina\\Desktop\\SecondHandEShop.Api\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\Depka\\.nuget\\packages\\",
+        "outputPath": "D:\\Users\\Despina\\Desktop\\SecondHandEShop.Api\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Marija\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Depka\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -37,12 +37,16 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
               "version": "[5.0.17, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
@@ -55,7 +59,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -64,36 +69,36 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Repository\\Repository.csproj": {
+    "D:\\Users\\Despina\\Desktop\\SecondHandEShop.Api\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Repository\\Repository.csproj",
+        "projectUniqueName": "D:\\Users\\Despina\\Desktop\\SecondHandEShop.Api\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Repository\\Repository.csproj",
-        "packagesPath": "C:\\Users\\Marija\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Repository\\obj\\",
+        "projectPath": "D:\\Users\\Despina\\Desktop\\SecondHandEShop.Api\\Repository\\Repository.csproj",
+        "packagesPath": "C:\\Users\\Depka\\.nuget\\packages\\",
+        "outputPath": "D:\\Users\\Despina\\Desktop\\SecondHandEShop.Api\\Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Marija\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Depka\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Marija\\Desktop\\SecondHandEShop.Api\\Domain\\Domain.csproj"
+              "D:\\Users\\Despina\\Desktop\\SecondHandEShop.Api\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\Users\\Despina\\Desktop\\SecondHandEShop.Api\\Domain\\Domain.csproj"
               }
             }
           }
@@ -105,16 +110,16 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.32, )"
+              "version": "[6.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[3.1.32, )"
+              "version": "[6.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -129,7 +134,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -138,7 +144,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

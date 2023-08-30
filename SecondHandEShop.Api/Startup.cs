@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -36,6 +37,7 @@ namespace SecondHandEShop.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllers()
                  .AddNewtonsoftJson(options => // Add the configuration for Newtonsoft.Json here
                 {
@@ -43,7 +45,7 @@ namespace SecondHandEShop.Api
                  });
 
             services.AddControllers();
-            services.AddDbContext<AppDbContext>();
+            services.AddDbContext<AppDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DB_CON_STRING")));
 
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -69,7 +71,7 @@ namespace SecondHandEShop.Api
             {
                 options.AddPolicy("SecondHandEshopPolicy", builder =>
                  {
-                     builder.WithOrigins("http://localhost:3000")
+                     builder.WithOrigins("https://rewear.azurewebsites.net")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                  });
