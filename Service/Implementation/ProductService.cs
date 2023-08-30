@@ -65,11 +65,11 @@ namespace Service.Implementation
             product.ProductBrand = productDTO.ProductBrand;
             product.Condition = (Condition)Enum.Parse(typeof(Condition), productDTO.ProductCondition);
             product.ProductSex = (Sex)Enum.Parse(typeof(Sex), productDTO.ProductSex);
-
+            product.ProductAvailablity = productDTO.ProductAvailablity;
 
             _productRepository.Update(product);
 
-            return productDTO;
+            return (ProductDTO)product;
         }
 
         public List<ProductDTO> GetProducts(string type, string sex, string subcategory, string searchTerm, string colorFilter, string sizeFilter, string conditionFilter, string sortByPrice, string sortByUserRating, string shoeNumberRange)

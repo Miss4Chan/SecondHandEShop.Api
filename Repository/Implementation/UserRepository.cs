@@ -64,7 +64,7 @@ namespace Repository.Implementation
 
         public ShopApplicationUser GetByEmail(string email)
         {
-            var user = entities.Where(e => e.Username == email)
+            var user = entities.Where(e => e.Email == email)
                  .Include(z => z.UserShoppingCart)
                 .Include("UserShoppingCart.ProductsInShoppingCart")
                 .Include("UserShoppingCart.ProductsInShoppingCart.Product")

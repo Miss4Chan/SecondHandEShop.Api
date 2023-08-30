@@ -23,8 +23,8 @@ namespace Service.Implementation
 
         public CommentDTO AddComment( CommentDTO comment, int rating)
         {
-            var commenter = _userRepository.GetByUsername(comment.CommenterUsername);
-            var receiver = _userRepository.GetByUsername(comment.ReceiverUsername);
+            var commenter = _userRepository.GetByEmail(comment.CommenterUsername);
+            var receiver = _userRepository.GetByEmail(comment.ReceiverUsername);
 
             if (rating !=null)
             {
